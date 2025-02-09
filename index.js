@@ -231,20 +231,23 @@ app.controller('myCtrl', function ($scope) {
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
 			let RemainingSpread = seqStart - seqEnd - combo_length
+			let ComboBuffs = bsIndices
 			if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd - RemainingSpread)){
 				let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
-				bsIndices.push[efs]
+				ComboBuffs.push[efs]
+				ComboBuffs.splice(i + combo_length - 1, 1)
 			};
-			seqStart = bsIndices[i];
-			seqEnd = bsIndices[i + combo_length - 1];
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
 			RemainingSpread = seqStart - seqEnd - combo_length
 			
 			if (cfInices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)){
 				let cfs = cfInices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
-				bsIndices.push[cfs]
+				ComboBuffs.push[cfs]
+				ComboBuffs.splice(i + combo_length - 1, 1)
 			};
-			seqStart = bsIndices[i];
-			seqEnd = bsIndices[i + combo_length - 1];
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
 			RemainingSpread = seqStart - seqEnd - combo_length
 			
 			let baseDistance = seqEnd - seqStart + 1;
