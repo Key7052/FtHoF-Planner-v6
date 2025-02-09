@@ -228,14 +228,14 @@ app.controller('myCtrl', function ($scope) {
 		let firstDistance = 10000000;
 		let firstStart = -1
 
-		for (var i = 0; i + combo_length <= bsIndices.length; i++) { 
+		for (var i = 0; i + combo_length <= bsIndices.length + 2; i++) { 
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
 			let ComboBuffs = []
 			ComboBuffs = []
 			ComboBuffs.push(...bsIndices)
 			if (efIndices.some(value => value > seqStart && value < seqEnd)){
-				let efs = efIndices.filter(value => value > seqStart && value < seqEnd)[0]
+				let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
 				if (efs !== undefined){
 				ComboBuffs.push(efs[0])
 				}
@@ -246,7 +246,7 @@ app.controller('myCtrl', function ($scope) {
 			RemainingSpread = seqStart - seqEnd - combo_length
 			
 			if (cfInices.some(value => value > seqStart && value < seqEnd)){
-				let cfs = cfInices.filter(value => value > seqStart&& value < seqEnd)[0]
+				let cfs = cfInices.filter(value => value > seqStart&& value < seqEnd)
 				ComboBuffs.push(cfs[0])
 				ComboBuffs.splice(i + combo_length - 1, 1)
 			};
@@ -287,8 +287,6 @@ app.controller('myCtrl', function ($scope) {
 		return false
 	}
 	function cookiesContainCf(cookie1, cookie2){
-		console.log(cookie1)
-		console.log(cookie2)
 		
 		if (cookie1.type == 'Click Frenzy') {
 			return true;
