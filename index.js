@@ -243,7 +243,7 @@ app.controller('myCtrl', function ($scope) {
 			};
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
-			RemainingSpread = seqStart - seqEnd - combo_length
+			
 			
 			if (cfInices.some(value => value > seqStart && value < seqEnd)){
 				let cfs = cfInices.filter(value => value > seqStart&& value < seqEnd)
@@ -252,7 +252,7 @@ app.controller('myCtrl', function ($scope) {
 			};
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
-			RemainingSpread = seqStart - seqEnd - combo_length
+			
 
 			console.log(ComboBuffs)
 			let baseDistance = seqEnd - seqStart + 1;
