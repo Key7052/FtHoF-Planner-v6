@@ -231,12 +231,11 @@ app.controller('myCtrl', function ($scope) {
 		for (var i = 0; i + combo_length <= bsIndices.length; i++) { 
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
-			let RemainingSpread = seqStart - seqEnd - combo_length
 			let ComboBuffs = []
 			ComboBuffs = []
 			ComboBuffs.push(...bsIndices)
-			if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)){
-				let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
+			if (efIndices.some(value => value > seqStart && value < seqEnd)){
+				let efs = efIndices.filter(value => value > seqStart && value < seqEnd)[0]
 				if (efs !== undefined){
 				ComboBuffs.push(efs[0])
 				}
@@ -246,8 +245,8 @@ app.controller('myCtrl', function ($scope) {
 			seqEnd = ComboBuffs[i + combo_length - 1];
 			RemainingSpread = seqStart - seqEnd - combo_length
 			
-			if (cfInices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)){
-				let cfs = cfInices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
+			if (cfInices.some(value => value > seqStart && value < seqEnd)){
+				let cfs = cfInices.filter(value => value > seqStart&& value < seqEnd)[0]
 				ComboBuffs.push(cfs[0])
 				ComboBuffs.splice(i + combo_length - 1, 1)
 			};
