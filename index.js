@@ -159,10 +159,8 @@ app.controller('myCtrl', function ($scope) {
 			if (cookiesContainEf($scope.include_ef_in_sequence ,cookie1Backfire, cookie2Backfire || gambler.hasEf )) {
 				efIndices.push(i);
 			}
-			if (cookiesContainCf(cookie1Success, cookie2Success) && i > cfInices[cfInices.length - 1] || gambler.hascf && i > cfInices[cfInices.length - 1]) {
-				if (cfInices.includes(i)) {
-					cfInices.splice(i)
-				}
+			if (cookiesContainCf(cookie1Success, cookie2Success) || gambler.hascf) {
+
 				cfInices.push(i);
 			}
 
