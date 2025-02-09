@@ -222,60 +222,71 @@ app.controller('myCtrl', function ($scope) {
 	//want to return shortest, and first sequence for a given combo_length
 	//if nothing that satisfies max_spread, shortest will still be filled but first will be empty
 	function findCombos(combo_length, max_spread, bsIndices, skipIndices, efIndices, cfInices) {
-		let shortestDistance = 10000000;
-		let shortestStart = -1;
+    let shortestDistance = 10000000;
+    let shortestStart = -1;
 
-		let firstDistance = 10000000;
-		let firstStart = -1
+    let firstDistance = 10000000;
+    let firstStart = -1;
 
-		for (var i = 0; i + combo_length <= bsIndices.length; i++) { 
-			let seqStart = bsIndices[i];
-			let seqEnd = bsIndices[i + combo_length - 1];
-			let RemainingSpread = seqStart - seqEnd - combo_length
-			let ComboBuffs = []
-			ComboBuffs.concat(bsIndices)
-			if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)){
-				let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
-				if (efs !== undefined){
-				ComboBuffs.push(efs[0])
-				}
-				ComboBuffs.splice(i + combo_length - 1, 1)
-			};
-			seqStart = ComboBuffs[i];
-			seqEnd = ComboBuffs[i + combo_length - 1];
-			RemainingSpread = seqStart - seqEnd - combo_length
-			
-			if (cfInices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)){
-				let cfs = cfInices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
-				ComboBuffs.push(cfs[0])
-				ComboBuffs.splice(i + combo_length - 1, 1)
-			};
-			seqStart = ComboBuffs[i];
-			seqEnd = ComboBuffs[i + combo_length - 1];
-			RemainingSpread = seqStart - seqEnd - combo_length
+    for (var i = 0; i + combo_length <= bsIndices.length; i++) {
+        let seqStart = bsIndices[i];
+        let seqEnd = bsIndices[i + combo_length - 1];
+        let RemainingSpread = seqStart - seqEnd - combo_length;
+        let ComboBuffs = bsIndices.slice();
+        
+        
+        if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)) {
+            let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread);
+            if (efs.length > 0) {
+                ComboBuffs.push(efs[0]);  
+                ComboBuffs.splice(i + combo_length - 1, 1); 
+            }
+        }
+        
+        seqStart = ComboBuffs[i];
+        seqEnd = ComboBuffs[i + combo_length - 1];
+        RemainingSpread = seqStart - seqEnd - combo_length;
 
-			console.log(ComboBuffs)
-			let baseDistance = seqEnd - seqStart + 1;
+        
+        if (cfInices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)) {
+            let cfs = cfInices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread);
+            if (cfs.length > 0) {
+                ComboBuffs.push(cfs[0]);  
+                ComboBuffs.splice(i + combo_length - 1, 1);
+            }
+        }
 
-			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !ComboBuffs.includes(idx));
+        seqStart = ComboBuffs[i];
+        seqEnd = ComboBuffs[i + combo_length - 1];
+        RemainingSpread = seqStart - seqEnd - combo_length;
 
-			let distance = baseDistance - skips.length;
-			if (firstStart == -1 && distance <= combo_length + max_spread) {
-				firstStart = seqStart;
-				firstDistance = distance;
-			}
+        console.log(ComboBuffs);
 
-			if (distance < shortestDistance) {
-				shortestStart = seqStart;
-				shortestDistance = distance;
-			}
-		}
+        let baseDistance = seqEnd - seqStart + 1;
 
-		return {
-			shortest: { idx: shortestStart, length: shortestDistance },
-			first: { idx: firstStart, length: firstDistance }
-		};
-	}
+        
+        let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !ComboBuffs.includes(idx));
+
+        let distance = baseDistance - skips.length;
+
+        
+        if (firstStart == -1 && distance <= combo_length + max_spread) {
+            firstStart = seqStart;
+            firstDistance = distance;
+        }
+
+        
+        if (distance < shortestDistance) {
+            shortestStart = seqStart;
+            shortestDistance = distance;
+        }
+    }
+
+    return {
+        shortest: { idx: shortestStart, length: shortestDistance },
+        first: { idx: firstStart, length: firstDistance }
+    };
+}
 
 	function cookiesContainBs(cookie1, cookie2) {
 		if (cookie1.type == 'Building Special') {
