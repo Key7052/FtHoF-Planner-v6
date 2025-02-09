@@ -272,23 +272,34 @@ app.controller('myCtrl', function ($scope) {
 		};
 	}
 
-	function cookiesContainBs(...cookies) {
-		return cookies.some((cookie) => {
-			return cookie.type == 'Building Special';
-		});
+	function cookiesContainBs(cookie1, cookie2) {
+		if (cookie1.type == 'Building Special') {
+			return true;
+		};
+		if (cookie2.type == 'Building Special') {
+			return true;
+		};
+		return false
 	}
-	function cookiesContainCf(...cookies) {
-		return cookies.some((cookie) => {
-			return cookie.type == 'Click Frenzy';
-		});
+	function cookiesContainCf(cookie1,cookie2){
+		if (cookie1.type == 'Click Frenzy') {
+			return true;
+		};
+		if (cookie2.type == 'Click Frenzy') {
+			return true;
+		};
+		return false
 	}
-	function cookiesContainEf (include_ef, ...cookies){
+	function cookiesContainEf (include_ef, cookie1, cookie2){
 		if (include_ef == true) {
-		return cookies.some((cookie) => {
-			return cookie.type == 'Elder Frenzy';
-		});
+		if (cookie1.type == 'Elder Frenzy'){
+			return true
+		};
+		if (cookie2.type == 'Elder Frenzy'){
+			return true
+		};
 	}
-
+	return false
 	}
 
 	function choose(arr) {
