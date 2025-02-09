@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+body,
+.normal {
+    font-family: 'Montserrat', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: white;
+    transition: background-color 1.5s;
+}
+
+.default {
+    font-family: sans-serif;
+}
+
+.dark,
+.dark body {
+    background-color: #222;
+    transition: background-color 2s;
+}
+
+.dark .md-content,
+.dark .md-subheader {
+    background-color: #999 !important;
+}
+
+.dark .md-icon {
+    border-color: white !important;
+}
+
+.dark * {
+    color: white !important;
+}
+
+.md-subheader-content,
+.md-list-item-text>.ng-binding {
+    color: black !important;
+}
+
+.md-avatar {
+    border-radius: 2px !important;
+}
+
+.md-pixelated {
+    image-rendering: pixelated;
+    width: 48px !important;
+    height: 48px !important;
+}
+
+body>div {
+    padding: 4px;
+}
+
+label {
+    margin: 3px;
+}
+
+#apply {
+    background-color: #f4e499;
+    color: black;
+}
+
+#cast {
+    background-color: #75d316;
+    color: black;
+}
+
+#calc {
+    background-color: #c9e5f7;
+    color: black;
+}
+
+pre {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+input {
+    margin: 8px 2px;
+    width: 80px;
+    background-color: #bbb2;
+    border: solid 1px #bbb;
+    border-radius: 5px;
+}
+
+.content {
+    max-width: 1440px;
+    margin: auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+td {
+    min-width: 150px;
+}
+
+td.index {
+    min-width: 50px;
+}
+
+md-input-container .md-errors-spacer {
+    min-height: 0px !important;
+}
+
+.listdemoBasicUsage md-divider {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+a {
+    font-weight: 600;
+    cursor: pointer;
+    color: #3489f8;
+}
+
+a:hover,
+a.hover {
+    text-decoration: underline;
+}
+
+.md-subheader .md-subheader-content {
+    min-height: 2.5em;
+}
+
+.highlightCombo {
+    background-color: yellow;
+}
+
+.highlightSkip {
+    background-color: lightblue;
+}
+
+.combo-listitem {
+    height: 3.5em;
+}
+
+.collapse-content {
+    padding: 6px 18px;
+    display: none;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 5px solid lightblue;
+}
+
+.hide-column {
+    align-self: flex-end;
+    font-size: 0.7em;
+}
+
+.hide-column>input {
+    width: 13px;
+    accent-color: #ef5475;
+}
