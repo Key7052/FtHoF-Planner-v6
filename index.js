@@ -160,6 +160,9 @@ app.controller('myCtrl', function ($scope) {
 				efIndices.push(i);
 			}
 			if (cookiesContainCf(cookie1Success, cookie2Success) && i > cfInices[cfInices.length - 1] || gambler.hascf && i > cfInices[cfInices.length - 1]) {
+				if (cfInices.includes(i)) {
+					cfInices.splice(i)
+				}
 				cfInices.push(i);
 			}
 
