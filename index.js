@@ -283,8 +283,8 @@ app.controller('myCtrl', function ($scope) {
 		return false
 	}
 	function cookiesContainCf(cookie1, cookie2){
-console.log('cookie1 type:', cookie1.type);
-console.log('cookie2 type:', cookie2.type);
+		console.log(cookie1)
+		console.log(cookie2)
 		
 		if (cookie1.type == 'Click Frenzy') {
 			return true;
