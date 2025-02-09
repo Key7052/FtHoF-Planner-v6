@@ -252,7 +252,7 @@ app.controller('myCtrl', function ($scope) {
 			
 			let baseDistance = seqEnd - seqStart + 1;
 
-			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !bsIndices.includes(idx));
+			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !ComboBuffs.includes(idx));
 
 			let distance = baseDistance - skips.length;
 			if (firstStart == -1 && distance <= combo_length + max_spread) {
