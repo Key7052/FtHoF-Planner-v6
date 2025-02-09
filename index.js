@@ -282,7 +282,7 @@ app.controller('myCtrl', function ($scope) {
 		};
 		return false
 	}
-	function cookiesContainCf(cookie1,cookie2){
+	function cookiesContainCf(cookie1, cookie2){
 		if (cookie1.type == 'Click Frenzy') {
 			return true;
 		};
