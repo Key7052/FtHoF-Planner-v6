@@ -235,7 +235,9 @@ app.controller('myCtrl', function ($scope) {
 			let ComboBuffs = bsIndices
 			if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd - RemainingSpread)){
 				let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
+				if (efs !== undefined){
 				ComboBuffs.push(efs[0])
+				}
 				ComboBuffs.splice(i + combo_length - 1, 1)
 			};
 			seqStart = ComboBuffs[i];
