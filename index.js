@@ -230,21 +230,23 @@ app.controller('myCtrl', function ($scope) {
 		for (var i = 0; i + combo_length <= bsIndices.length; i++) { 
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
-
-			if (efIndices.some(value => value > seqStart && value < seqEnd)){
-				let efs = efIndices.filter(value => value > seqStart && value < seqEnd)[0]
+			let RemainingSpread = seqStart - seqEnd - combo_length
+			if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd - RemainingSpread)){
+				let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
 				bsIndices.push[efs]
 			};
 			seqStart = bsIndices[i];
 			seqEnd = bsIndices[i + combo_length - 1];
-
-			if (cfInices.some(value => value > seqStart && value < seqEnd)){
-				let cfs = cfInices.filter(value => value > seqStart && value < seqEnd)[0]
+			RemainingSpread = seqStart - seqEnd - combo_length
+			
+			if (cfInices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)){
+				let cfs = cfInices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)[0]
 				bsIndices.push[cfs]
 			};
 			seqStart = bsIndices[i];
 			seqEnd = bsIndices[i + combo_length - 1];
-	
+			RemainingSpread = seqStart - seqEnd - combo_length
+			
 			let baseDistance = seqEnd - seqStart + 1;
 
 			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !bsIndices.includes(idx));
