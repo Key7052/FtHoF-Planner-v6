@@ -219,8 +219,7 @@ app.controller('myCtrl', function ($scope) {
 		}
 	}
 
-	//want to return shortest, and first sequence for a given combo_length
-	//if nothing that satisfies max_spread, shortest will still be filled but first will be empty
+	
 	function findCombos(combo_length, max_spread, bsIndices, skipIndices, efIndices, cfInices) {
     let shortestDistance = 10000000;
     let shortestStart = -1;
@@ -229,20 +228,28 @@ app.controller('myCtrl', function ($scope) {
     let firstStart = -1;
 
     for (var i = 0; i + combo_length <= bsIndices.length; i++) {
+        
         let seqStart = bsIndices[i];
         let seqEnd = bsIndices[i + combo_length - 1];
         let RemainingSpread = seqStart - seqEnd - combo_length;
-        let ComboBuffs = bsIndices.slice();
-        
+        let ComboBuffs = bsIndices.slice();  
+
+        console.log(`Iteration ${i}: seqStart = ${seqStart}, seqEnd = ${seqEnd}, RemainingSpread = ${RemainingSpread}`);
+        console.log('Initial ComboBuffs:', ComboBuffs);
+
         
         if (efIndices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)) {
             let efs = efIndices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread);
+            console.log('Found matching efIndices:', efs);
             if (efs.length > 0) {
                 ComboBuffs.push(efs[0]);  
-                ComboBuffs.splice(i + combo_length - 1, 1); 
+                ComboBuffs.splice(i + combo_length - 1, 1);  
             }
         }
+
         
+        console.log('ComboBuffs after efIndices processing:', ComboBuffs);
+
         seqStart = ComboBuffs[i];
         seqEnd = ComboBuffs[i + combo_length - 1];
         RemainingSpread = seqStart - seqEnd - combo_length;
@@ -250,17 +257,22 @@ app.controller('myCtrl', function ($scope) {
         
         if (cfInices.some(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread)) {
             let cfs = cfInices.filter(value => value > seqStart - RemainingSpread && value < seqEnd + RemainingSpread);
+            console.log('Found matching cfInices:', cfs);
             if (cfs.length > 0) {
-                ComboBuffs.push(cfs[0]);  
-                ComboBuffs.splice(i + combo_length - 1, 1);
+                ComboBuffs.push(cfs[0]);  // Push only the first valid cfs
+                ComboBuffs.splice(i + combo_length - 1, 1);  // Remove element at the specified position
             }
         }
+
+        
+        console.log('ComboBuffs after cfInices processing:', ComboBuffs);
 
         seqStart = ComboBuffs[i];
         seqEnd = ComboBuffs[i + combo_length - 1];
         RemainingSpread = seqStart - seqEnd - combo_length;
 
-        console.log(ComboBuffs);
+        
+        console.log('Final ComboBuffs:', ComboBuffs);
 
         let baseDistance = seqEnd - seqStart + 1;
 
@@ -281,6 +293,13 @@ app.controller('myCtrl', function ($scope) {
             shortestDistance = distance;
         }
     }
+
+    return {
+        shortest: { idx: shortestStart, length: shortestDistance },
+        first: { idx: firstStart, length: firstDistance }
+    };
+}
+
 
     return {
         shortest: { idx: shortestStart, length: shortestDistance },
