@@ -288,7 +288,6 @@ app.controller('myCtrl', function ($scope) {
 			return cookie.type == 'Elder Frenzy';
 		});
 	}
-	return false
 
 	}
 
