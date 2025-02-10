@@ -232,11 +232,12 @@ app.controller('myCtrl', function ($scope) {
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
 			let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
+			let cfs = cfInices.filter(value => value > seqStart && value < seqEnd)
 			let ComboBuffs = []
 			ComboBuffs = []
 			ComboBuffs.push(...bsIndices)
-			if (efIndices.some(value => value > seqStart && value < seqEnd)){
-				if (efs !== []){
+				
+			if (efs !== []){
 				ComboBuffs.push(efs[0])
 				}
 				ComboBuffs.splice(i + combo_length - 1, 1)
@@ -253,13 +254,14 @@ app.controller('myCtrl', function ($scope) {
 
 			
 		
-			
-			
-			if (cfInices.some(value => value > seqStart && value < seqEnd)){
-				let cfs = cfInices.filter(value => value > seqStart&& value < seqEnd)
+				if (cfs !== []){
 				ComboBuffs.push(cfs[0])
 				ComboBuffs.splice(i + combo_length - 1, 1)
-			};
+				}  else {
+				console.log(efs)
+				console.log(efIndices)
+				}
+	
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
 			
