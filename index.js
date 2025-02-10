@@ -241,14 +241,17 @@ app.controller('myCtrl', function ($scope) {
 				}
 				ComboBuffs.splice(i + combo_length - 1, 1)
 				console.log("ef added to combo buffs")
-			};
-			seqStart = ComboBuffs[i];
-			seqEnd = ComboBuffs[i + combo_length - 1];
+			}; else {
 
-			if (efIndices.some(value => value > seqStart && value < seqEnd) == false){
 				console.log(efs)
 				console.log(efIndices)
 			};
+				
+			}
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
+
+			
 		
 			
 			
