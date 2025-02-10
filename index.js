@@ -244,6 +244,12 @@ app.controller('myCtrl', function ($scope) {
 			};
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
+
+			if (efIndices.some(value => value > seqStart && value < seqEnd) == false){
+				console.log(efs)
+				console.log(efIndices)
+			};
+		
 			
 			
 			if (cfInices.some(value => value > seqStart && value < seqEnd)){
