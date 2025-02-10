@@ -231,11 +231,11 @@ app.controller('myCtrl', function ($scope) {
 		for (var i = 0; i + combo_length <= bsIndices.length + 2; i++) { 
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
+			let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
 			let ComboBuffs = []
 			ComboBuffs = []
 			ComboBuffs.push(...bsIndices)
 			if (efIndices.some(value => value > seqStart && value < seqEnd)){
-				let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
 				if (efs !== []){
 				ComboBuffs.push(efs[0])
 				}
