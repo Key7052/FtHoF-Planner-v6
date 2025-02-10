@@ -236,10 +236,11 @@ app.controller('myCtrl', function ($scope) {
 			ComboBuffs.push(...bsIndices)
 			if (efIndices.some(value => value > seqStart && value < seqEnd)){
 				let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
-				if (efs !== undefined){
+				if (efs !== []){
 				ComboBuffs.push(efs[0])
 				}
 				ComboBuffs.splice(i + combo_length - 1, 1)
+				console.log("ef added to combo buffs")
 			};
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
