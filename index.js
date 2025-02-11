@@ -233,18 +233,26 @@ app.controller('myCtrl', function ($scope) {
 			let efincombo = false
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
+			console.log(seqEnd)
+			console.log(seqStart)
 			let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
-			let cfs = cfInices.filter(value => value > seqStart&& value < seqEnd)
+			console.log(efs)
+			let cfs = cfInices.filter(value => value > seqStart && value < seqEnd)
+			console.log(cfs)
 			let ComboBuffs = []
 			ComboBuffs = []
 			ComboBuffs.push(...bsIndices)
-			
+		
 			
 				if (efs.length !== 0){
-				ComboBuffs.push(efs[0])
-				efincombo = true
-				ComboBuffs.sort((a, b) => a - b)
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
+				ComboBuffs.push(efs[0])
+				ComboBuffs.sort((a, b) => a - b)
+				seqStart = ComboBuffs[i];
+				seqEnd = ComboBuffs[i + combo_length - 1];
+				if (efs[0] !== seqEnd){
+					efincombo = true
+					}
 				}
 
 			seqStart = ComboBuffs[i];
@@ -252,52 +260,65 @@ app.controller('myCtrl', function ($scope) {
 			console.log(seqEnd)
 			
 			if (cfs.length !== 0){
-				ComboBuffs.push(cfs[0])
-				cfincombo = true
-				ComboBuffs.sort((a, b) => a - b)
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
+				ComboBuffs.push(cfs[0])
+				ComboBuffs.sort((a, b) => a - b)
+				seqStart = ComboBuffs[i];
+				seqEnd = ComboBuffs[i + combo_length - 1];
+				if (cfs[0] !== seqEnd){
+				cfincombo = true
+				}
 			}
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
 		
 			let RemainingSpread = max_spread - (seqEnd - seqStart - 1)
-			console.log(seqEnd - seqStart)
-
+			
 			
 
 			let efbeforecombo = efIndices.filter(item => item >= seqStart - RemainingSpread && item <= seqStart);
 			let cfbeforecombo = cfInices.filter(item => item >= seqStart - RemainingSpread && item <= seqStart);
-console.log(cfbeforecombo)
-console.log(efbeforecombo)
-			if (efbeforecombo.length !== 0 && efincombo == false){ 
+			if (efbeforecombo.length !== 0 && efincombo == false && !ComboBuffs.includes(efbeforecombo[0])){ 
 				console.log(efbeforecombo)
 				ComboBuffs.push(efbeforecombo[0])
 				ComboBuffs.sort((a, b) => a - b)
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
 			}
-			if (cfbeforecombo.length !== 0 && cfincombo == false){ 
-				console.log(cfbeforecombo)
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
+			console.log("cfincombo", cfincombo)
+			if (cfbeforecombo.length !== 0 && cfincombo == false && !ComboBuffs.includes(cfbeforecombo[0])){ 
 				ComboBuffs.push(cfbeforecombo[0])
 				ComboBuffs.sort((a, b) => a - b)
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
+				seqEnd = ComboBuffs[i + combo_length - 1];
 			}
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
+
 
 			let baseDistance = seqEnd - seqStart + 1;
 
 			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !ComboBuffs.includes(idx));
 
 			let distance = baseDistance - skips.length;
-			if (firstStart == -1 && distance <= combo_length + max_spread && distance > combo_length) {
+
+			if (distance < combo_length) {
+				distance = distance + (combo_length - distance)
+				seqStart = seqStart - (combo_length - distance)
+			}
+
+
+			if (firstStart == -1 && distance < combo_length + max_spread) {
 				firstStart = seqStart;
 				firstDistance = distance;
 			}
 
-			if (distance < shortestDistance && distance > combo_length) {
+			if (distance < shortestDistance) {
 				shortestStart = seqStart;
 				shortestDistance = distance;
 			}
+			
 	
 		}
 
