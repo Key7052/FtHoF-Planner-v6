@@ -223,64 +223,168 @@ app.controller('myCtrl', function ($scope) {
 	//if nothing that satisfies max_spread, shortest will still be filled but first will be empty
 	function findCombos(combo_length, max_spread, bsIndices, skipIndices, efIndices, cfInices) {
 		let shortestDistance = 10000000;
+		let shortestDistance2 = 10000000;
+		let shortestDistance3 = 10000000;
 		let shortestStart = -1;
+		let shortestStart2 = -1;
+		let shortestStart3 = -1;
 
 		let firstDistance = 10000000;
+		let firstDistance2 = 10000000;
+		let firstDistance3 = 10000000;
 		let firstStart = -1
-
+		let firstStart2 = -1
+		let firstStart3 = -1
 		for (var i = 0; i + combo_length <= bsIndices.length + 2; i++) { 
 			let seqStart = bsIndices[i];
 			let seqEnd = bsIndices[i + combo_length - 1];
+			let seqStart2 = efIndices[i];
+			let seqEnd2 = efIndices[i + combo_length - 1];
+			let seqStart3 = cfInices[i];
+			let seqEnd3 = cfInices[i + combo_length - 1];
 			let efs = efIndices.filter(value => value > seqStart && value < seqEnd)
 			let cfs = cfInices.filter(value => value > seqStart && value < seqEnd)
+			let cfs2 = cfInices.filter(value => value > seqStart2 && value < seqEnd2)
+			let bses2 = bsIndices.filter(value => value > seqStart2 && value < seqEnd2)
+			let bses3 = bsIndices.filter(value => value > seqStart3 && value < seqEnd3)
+			let efs3 = efIndices.filter(value => value > seqStart3 && value < seqEnd3)
 			let ComboBuffs = []
 			ComboBuffs = []
+			let ComboBuffs2 = []
+			ComboBuffs2 = []
+			let ComboBuffs3 = []
+			ComboBuffs3 = []
 			ComboBuffs.push(...bsIndices)
+			ComboBuffs2.push(...efIndices)
+			ComboBuffs3.push(...cfInices)
+			
+			
+				if (efs.length !== 0){
 				
-			if (efs !== []){
-				ComboBuffs.push(efs[0])
+					ComboBuffs.push(efs[0])
+				ComboBuffs.sort((a, b) => a - b)
+				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
 				}
-				ComboBuffs.splice(i + combo_length - 1, 1)
-				console.log("ef added to combo buffs")
-			}; else {
 
-				console.log(efs)
-				console.log(efIndices)
-			};
-				
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
+			
+			
+			if (cfs.length !== 0){
+				ComboBuffs.push(cfs[0])
+				ComboBuffs.sort((a, b) => a - b)
+				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
 			}
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
+			//combobuffs1 is created
 
-			
+			if (bses2.length !== 0){
+				
+				ComboBuffs2.push(bses2[0])
+			ComboBuffs2.sort((a, b) => a - b)
+			ComboBuffs2 = ComboBuffs2.filter(item => item !== seqEnd2)
+			}
+
+		seqStart2 = ComboBuffs2[i];
+		seqEnd2 = ComboBuffs2[i + combo_length - 1];
 		
-				if (cfs !== []){
-				ComboBuffs.push(cfs[0])
-				ComboBuffs.splice(i + combo_length - 1, 1)
-				}  else {
-				console.log(efs)
-				console.log(efIndices)
-				}
-	
-			seqStart = ComboBuffs[i];
-			seqEnd = ComboBuffs[i + combo_length - 1];
-			
+		
+		if (cfs2.length !== 0){
+			ComboBuffs2.push(cfs2[0])
+			ComboBuffs2.sort((a, b) => a - b)
+			ComboBuffs2 = ComboBuffs2.filter(item => item !== seqEnd2)
+		}
+		seqStart2 = ComboBuffs2[i];
+		seqEnd2 = ComboBuffs2[i + combo_length - 1];
+		
+//combobuffs2 is created
 
-			console.log(ComboBuffs)
+		if (efs3.length !== 0){
+			ComboBuffs3.push(efs3[0])
+		ComboBuffs3.sort((a, b) => a - b)
+		ComboBuffs3 = ComboBuffs3.filter(item => item !== seqEnd3)
+		}
+
+	seqStart3 = ComboBuffs3[i];
+	seqEnd3 = ComboBuffs3[i + combo_length - 1];
+	
+	
+	if (bses3.length !== 0){
+		ComboBuffs3.push(cfs[0])
+		ComboBuffs3.sort((a, b) => a - b)
+		ComboBuffs3 = ComboBuffs3.filter(item => item !== seqEnd)
+	}
+	seqStart3 = ComboBuffs3[i];
+	seqEnd3 = ComboBuffs3[i + combo_length - 1];
+
+	//combobuffs3 is created
+
 			let baseDistance = seqEnd - seqStart + 1;
+			let baseDistance2 = seqEnd2 - seqStart2 + 1;
+			let baseDistance3 = seqEnd3 - seqStart3 + 1;
 
 			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !ComboBuffs.includes(idx));
+			let skips2 = skipIndices.filter((idx) => idx > seqStart2 && idx < seqEnd2 && !ComboBuffs2.includes(idx));
+			let skips3 = skipIndices.filter((idx) => idx > seqStart3 && idx < seqEnd3 && !ComboBuffs3.includes(idx));
 
 			let distance = baseDistance - skips.length;
 			if (firstStart == -1 && distance <= combo_length + max_spread) {
 				firstStart = seqStart;
 				firstDistance = distance;
 			}
+			let distance2 = baseDistance2 - skips2.length;
+			if (firstStart2 == -1 && distance2 <= combo_length + max_spread) {
+				firstStart2 = seqStart2;
+				firstDistance2 = distance2;
+			}
+
+			let distance3 = baseDistance3 - skips3.length;
+			if (firstStart3 == -1 && distance3 <= combo_length + max_spread) {
+				firstStart3 = seqStart3;
+				firstDistance3 = distance3;
+			}
+			
+			firstStart = Math.min(
+				firstStart !== undefined ? firstStart : Infinity,
+				firstStart2 !== undefined ? firstStart2 : Infinity,
+				firstStart3 !== undefined ? firstStart3 : Infinity
+			  );
+
+			  firstDistance = Math.min(
+				firstDistance !== undefined ? firstDistance : Infinity,
+				firstDistance2 !== undefined ? firstDistance2 : Infinity,
+				firstDistance3 !== undefined ? firstDistance3 : Infinity
+			  );
 
 			if (distance < shortestDistance) {
 				shortestStart = seqStart;
-				shortestDistance = distance;
+				shortestDistance = distance
+			
 			}
+			if (distance2 < shortestDistance2) {
+				shortestStart2 = seqStart2;
+				shortestDistance2 = distance2
+			}
+			if (distance3 < shortestDistance3) {
+				shortestStart3 = seqStart3;
+				shortestDistance3 = distance3
+			}
+
+
+			shortestStart = Math.min(
+				shortestStart !== undefined ? shortestStart : Infinity,
+				shortestStart2 !== undefined ? shortestStart2 : Infinity,
+				shortestStart3 !== undefined ? shortestStart3 : Infinity
+			  );
+
+			  shortestDistance = Math.min(
+				shortestDistance!== undefined ? shortestDistance : Infinity,
+				shortestDistance2!== undefined ? shortestDistance2 : Infinity,
+				shortestDistance3!== undefined ? shortestDistance3 : Infinity
+			  );
+			
+
 		}
 
 		return {
