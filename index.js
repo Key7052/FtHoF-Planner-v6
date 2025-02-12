@@ -156,7 +156,7 @@ app.controller('myCtrl', function ($scope) {
 			if (cookiesContainBs(cookie1Success, cookie2Success) || gambler.hasBs) {
 				bsIndices.push(i);
 			}
-			if (cookiesContainEf($scope.include_ef_in_sequence ,cookie1Backfire, cookie2Ba	ckfire || gambler.hasEf )) {
+			if (cookiesContainEf($scope.include_ef_in_sequence ,cookie1Backfire, cookie2Backfire || gambler.hasEf )) {
 				efIndices.push(i);
 			}
 			if (cookiesContainCf(cookie1Success, cookie2Success) || gambler.hascf) {
