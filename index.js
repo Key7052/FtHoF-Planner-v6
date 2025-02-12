@@ -224,7 +224,7 @@ app.controller('myCtrl', function ($scope) {
 	function findCombos(combo_length, max_spread, bsIndices, skipIndices, efIndices, cfInices) {
 		let shortestDistance = 10000000;
 		let shortestStart = -1;
-
+		max_spread = max_spread + 1 
 		let firstDistance = 10000000;
 		let firstStart = -1
 
