@@ -228,6 +228,7 @@ app.controller('myCtrl', function ($scope) {
 		let firstDistance = 10000000;
 		let firstStart = -1
 
+
 		for (var i = 0; i + combo_length <= bsIndices.length; i++) { 
 			let cfincombo = false
 			let efincombo = false
@@ -296,6 +297,7 @@ app.controller('myCtrl', function ($scope) {
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
 
+			console.log(ComboBuffs)
 
 			let baseDistance = seqEnd - seqStart + 1;
 
