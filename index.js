@@ -188,10 +188,6 @@ app.controller('myCtrl', function ($scope) {
 			arr.push(gambler);
 			$scope.displayCookies.push(arr);
 		}
-		console.log($scope.cookies);
-		console.log(bsIndices);
-		console.log(skipIndices);
-		console.log(Date.now() - currentTime);
 
 		$scope.combos = {}
 
