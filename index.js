@@ -241,7 +241,7 @@ app.controller('myCtrl', function ($scope) {
 			ComboBuffs.push(...bsIndices)
 		
 			
-				if (efs.length !== 0){
+				if (efs.length !== 0 && ComboBuffs.includes(efs[0]) == false){
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
 				ComboBuffs.push(efs[0])
 				ComboBuffs.sort((a, b) => a - b)
@@ -256,7 +256,7 @@ app.controller('myCtrl', function ($scope) {
 			seqEnd = ComboBuffs[i + combo_length - 1];
 			console.log(seqEnd)
 			
-			if (cfs.length !== 0){
+			if (cfs.length !== 0 && ComboBuffs.includes(cfs[0]) == false){
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
 				ComboBuffs.push(cfs[0])
 				ComboBuffs.sort((a, b) => a - b)
