@@ -281,23 +281,49 @@ app.controller('myCtrl', function ($scope) {
 			
 			
 
-			let efbeforecombo = efIndices.filter(item => item >= seqStart - RemainingSpread && item <= seqStart);
-			let cfbeforecombo = cfInices.filter(item => item >= seqStart - RemainingSpread && item <= seqStart);
-			if (efbeforecombo.length !== 0 && efincombo == false && !ComboBuffs.includes(efbeforecombo[0])){ 
+			let efbeforecombo = efIndices.filter(item => item >= seqStart - RemainingSpread && item < seqStart);
+			let cfbeforecombo = cfInices.filter(item => item >= seqStart - RemainingSpread && item < seqStart);
+			let efaftercombo = efIndices.filter(item => item >= seqEnd + RemainingSpread && item > seqEnd);
+			let cfaftercombo = cfInices.filter(item => item >= seqEnd + RemainingSpread && item > seqEnd);
+
+			if (efbeforecombo.length !== 0 && efincombo == false && !ComboBuffs.includes(efbeforecombo[0]) && seqStart - efbeforecombo < efaftercombo - seqEnd) { 
 				console.log(efbeforecombo)
 				ComboBuffs.push(efbeforecombo[0])
 				ComboBuffs.sort((a, b) => a - b)
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
+				efincombo = true
 			}
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
+			if (efaftercombo.length !== 0 && efincombo == false && !ComboBuffs.includes(efaftercombo[0]) && seqStart - efbeforecombo <= efaftercombo - seqEnd) { 
+				console.log(efaftercombo)
+				ComboBuffs.push(efaftercombo[0])
+				ComboBuffs.sort((a, b) => a - b)
+				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
+			}
+
+
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
 			console.log("cfincombo", cfincombo)
-			if (cfbeforecombo.length !== 0 && cfincombo == false && !ComboBuffs.includes(cfbeforecombo[0])){ 
+			if (cfbeforecombo.length !== 0 && cfincombo == false && !ComboBuffs.includes(cfbeforecombo[0] && seqStart - cfbeforecombo > cfaftercombo - seqEnd)){ 
 				ComboBuffs.push(cfbeforecombo[0])
+				cfincombo = true
 				ComboBuffs.sort((a, b) => a - b)
 				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
 				seqEnd = ComboBuffs[i + combo_length - 1];
 			}
+
+			seqStart = ComboBuffs[i];
+			seqEnd = ComboBuffs[i + combo_length - 1];
+
+			if (cfaftercombo.length !== 0 && cfincombo == false && !ComboBuffs.includes(cfbeforecombo[0] && seqStart - cfbeforecombo <= cfaftercombo - seqEnd)){ 
+				ComboBuffs.push(cfaftercombo[0])
+				ComboBuffs.sort((a, b) => a - b)
+				ComboBuffs = ComboBuffs.filter(item => item !== seqEnd)
+				seqEnd = ComboBuffs[i + combo_length - 1];
+			}
+
 			seqStart = ComboBuffs[i];
 			seqEnd = ComboBuffs[i + combo_length - 1];
 
