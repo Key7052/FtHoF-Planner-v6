@@ -1,5 +1,3 @@
-"use strict";
-// This is the random seeding script used by Orteil.
 (function (a, b, c, d, e, f) {
 	function k(a) {
 		var b, c = a.length, e = this, f = 0, g = e.i = e.j = 0, h = e.S = [];
@@ -68,13 +66,17 @@ app.controller('myCtrl', function ($scope) {
 	//$scope.save_string = "Mi4wMTl8fDE1NTcwMjQwMjkzMjQ7MTUyNTU2Mzg4NjQ5ODsxNTU3MDI2MDY3NTI2O1ByZXR0eSBCaXNjdWl0O2ljb2NkfDExMTExMTExMTAwMTAwMTAwMDAxMHwzMTcyOTc5ODU2ODk2MS4wNzsyNDk5OTU5MzQxMDEyOTYuNjszNTE0OzgzMzc7Nzc3NzExMzQ3NDEzMDIuMjc7NzI2ODU7MDszOzEuNjMwODE0MDg0NjAwMTQxOGUrMTAxOzA7MDswOzA7MDsxMDg7MTE7MDswOzExOzE7MjU4MzAzNjsxO2NocmlzdG1hczswOzA7NS40NjM0NjQ4MjMyNzM2MjRlKzI5OzUuNDYzNDY0ODIzMjczNjI0ZSsyOTsxMDM0OTI0NTIwNTExOzA7MDsyMjY7MjI4OzIyMzsyMjI7MjI1OzU7MTswOzE7MTAwOzA7MDsxODk7NDY3OzE1NTcwMjM1NTE1NDY7MTU1Njk5MjAzMDQ0ODswOzEyOSwyMjc7NDA7fDE2MCwxNjAsMTg0MDI4NTc4NDIyMCwxLCwwOzE1MCwxNTAsNzE2NTA1ODQ0NTcwLDEsLDA7MTAwLDIxMCwyODczMDgyMzkzMyw5LDE1NTcwMjYyODY2MDQ6MDoxNTU3MDI0MDI5MzMxOjA6MDozNzM5OjE6MToxNTU3MDI0MDI5MzMxOiAxMTExMTAxMDExMTExMTAwMDAwMDEwMTEwMDAwMDAwMTAwIDA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOjA6MDowOiwwOzEwMCwyMDAsODg2MTIxODQ2MDMsMSwsMDsxMDAsMTgwLDE5NjIxNTUxOTQzMSwxLCwwOzgwLDE1MCw3MzUxMjI3MzcxNzcsMSwsMDs1MCw1MCwxNzUzMjgyNjI2MDA4LDEsMi8tMS8tMSAyIDE1NTcwMjU5NTgwMzQgMSwwOzUwLDUxLDY5OTUwMzAwMjc2NTksMSwzNiAwIDM1NTUgMSwwOzMwLDMwLDE5Njg2NTA3NjkzNjA0LDEsLDA7MTUsMTUsMjE5ODQxODMyNjA2NDIsMSwsMDsxMCwxMCwyMzI3OTQ1NzQyMDkyOCwxLCwwOzUsNSw1OTkyOTYzODI0OTY5OSwyLCwwOzAsMCwwLDQsLDA7MCwwLDAsMTAsLDA7MCwwLDAsNCwsMDswLDAsMCwxMCwsMDt8MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDAxMDEwMDAxMDEwMDAxMTExMTExMTExMTExMTExMTExMTExMTEwMDExMTExMTExMDAwMDAwMDAxMTExMTAxMTExMTExMTExMTExMTAwMDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTExMTExMTEwMDExMTEwMDAwMDAwMDExMDAxMTExMTAwMDEwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAxMDEwMTAwMDExMTExMTExMDAwMDAwMDAwMDExMDAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDAwMDAwMDAwMDExMDAxMTAwMTEwMDExMTExMTExMTEwMDAwMDAwMDExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMTExMTAxMDEwMDAxMDAwMDAxMDAwMTEwMDAwMDAwMDAwMDAwMDAwMDAxMTExMTExMTAwMDAwMDEwMTEwMDAwMDAxMTAwMDAwMDAwMDAwMDAwMTExMTAwMTExMTAwMTEwMDAwMDAxMTExMTExMTAwMDAxMTExMTExMTAwMDAxMTExMTExMDAwMDAxMTExMTExMTExMTEwMDAwMDAwMDAwMDAwMDAwMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAxMDExMTExMTExMTExMTExMDAxMDAwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDExMTExMTExMTExMTExMTExMDExMTExMTExMDAwMDExMDAwMDEwMDAwMDAwMDAxMDAwMDAxMDAwMTAwMDEwMDAwMDAwMDAwMDAwMDAwMDAwMTExMTExMTExMTAwMDAwMDAwMDAwMDAwMDAwMDAwMTExMTExMTExMTExMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDAwMDAwMDAwMDAwMDExMTExMTEwMDAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDAwMDAwMDAwMDEwMTAxMDEwMTAxMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTExMTAwMDAwMDAwMDAxMTExMTExMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTEwMDExMTExMTExMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTExMTEwMTEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMTExMTExMXwxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDExMTExMTExMTExMTExMTExMTExMTExMTEwMDAwMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEwMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEwMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDAwMDAwMDAwMDAwMDExMTEwMTExMTExMTExMTEwMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDExMTExMTExMTExMTExMTExMTExMTExMTExMTExMDExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExfA%3D%3D%21END%21%3D%3D%21END%21"
 	$scope.save_string = ""
 	$scope.lookahead = 200
-	$scope.level = 200
-	$scope.wantedBS = 200
-	$scope.magic = 999
-	$scope.max_magic = 999
-	$scope.config = ""
-	// Preset decent strategies; TODO
-	// $scope.possibleStrats = [null, "522fthof 52di/F 22fthof R+522fthof 22fthof\r\n522fthof 52F/hc 22fthof R+522di/hc 322fthof 22fthof", "547fthof 47di/F 27fthof R+547 47\r\n547fthof 47F/hc 27fthof, 547di/hc, 347fthof, 27fthof\r\n547fthof, 47di/F, 27fthof, R+517st, 317fthof, 17fthof\r\n547fthof, 47F/gfd, R+547di/hc, 327fthof, 27fthof"]
+	
+	$scope.loadParams = function () {
+		$scope.params = new URLSearchParams(document.location.search);
+		if($scope.params.get("seed") != null) {
+			$scope.seed = $scope.params.get("seed");
+			$scope.spellsCastTotal = parseInt($scope.params.get("spells"));
+			$scope.import_seed = $scope.seed;
+			$scope.import_spells = $scope.spellsCastTotal;
+			$scope.update_cookies();
+		}
+	}
 
 	$scope.load_more = function () {
 		$scope.lookahead += 50
@@ -87,179 +89,136 @@ app.controller('myCtrl', function ($scope) {
 		$scope.update_cookies();
 	}
 
-	// $scope.get_data = function () {
-	// 	var cookies = []
-	// 	var randomSeeds = [];
-	// 	$scope.baseBackfireChance = 0.15 * ($scope.supremeintellect ? 1.1 : 1) * ($scope.diminishineptitude ? 0.1 : 1);
-	// 	$scope.backfireChance = $scope.baseBackfireChance + 0.15 * $scope.on_screen_cookies;
-	// 	var bsIndices = [];
-	// 	var skipIndices = [];
-	// 	var currentTime = Date.now();
-	// 	for (var i = 0; i < $scope.lookahead; i++) {
-	// 		var currentSpell = i + $scope.spellsCastTotal;
-	// 		Math.seedrandom($scope.seed + '/' + currentSpell);
-	// 		var roll = Math.random();
-	// 		randomSeeds.push(roll);
-
-	// 		var c = []
-	// 		cookie1Success = check_cookies($scope.spellsCastTotal + i, '', false, true)
-	// 		cookie2Success = check_cookies($scope.spellsCastTotal + i, '', true, true)
-	// 		//cookie3 = check_cookies($scope.spellsCastTotal + i, '', true)
-	// 		cookie1Backfire = check_cookies($scope.spellsCastTotal + i, '', false, false)
-	// 		cookie2Backfire = check_cookies($scope.spellsCastTotal + i, '', true, false)
-	// 		var gambler = check_gambler($scope.spellsCastTotal + i)
-	// 		c.push(cookie1Success)
-	// 		c.push(cookie2Success)
-	// 		c.push(cookie1Backfire)
-	// 		c.push(cookie2Backfire)
-	// 		c.push(gambler)
-	// 		cookies.push(c)
-
-	// 		if (cookiesContainBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire) || gambler.hasBs || ($scope.include_ef_in_sequence && gambler.hasEf)) {
-	// 			bsIndices.push(i);
-	// 		}
-
-	// 		if (($scope.skip_abominations && gambler.type == 'Resurrect Abomination') || ($scope.skip_edifices && gambler.type == 'Spontaneous Edifice' && !gambler.backfire)) {
-	// 			skipIndices.push(i);
-	// 		}
-
-	// 		var arr = [];
-	// 		if (randomSeeds[i] + $scope.backfireChance < 1) {
-	// 			arr.push(c[0]);
-	// 			arr.push(c[1]);
-	// 			if (c[2].type == "Elder Frenzy") { arr[0].type += " (EF)"; arr[0].noteworthy = true; }
-	// 			if (c[3].type == "Elder Frenzy") { arr[1].type += " (EF)"; arr[1].noteworthy = true; }
-	// 			if (c[2].type == "Free Sugar Lump") { arr[0].type += " (Lump)"; }
-	// 			if (c[3].type == "Free Sugar Lump") { arr[1].type += " (Lump)"; }
-	// 		}
-	// 		else {
-	// 			arr.push(c[2]);
-	// 			arr.push(c[3]);
-	// 			if (c[0].type == "Building Special") { arr[0].type += " (BS)"; arr[0].noteworthy = true; }
-	// 			if (c[1].type == "Building Special") { arr[1].type += " (BS)"; arr[1].noteworthy = true; }
-	// 			if (c[0].type == "Free Sugar Lump") { arr[0].type += " (Lump)"; }
-	// 			if (c[1].type == "Free Sugar Lump") { arr[1].type += " (Lump)"; }
-	// 		}
-	// 		arr.push(gambler);
-	// 	}
-	// 	return cookies;
-	// }
-
-	// $scope.calculate_combos = function () {
-	// 	var data = $scope.get_data()
-	// 	console.info("Raw data: ", data)
-	// 	delete $scope.combos
-	// }
+	$scope.print_scope = function () {
+		console.log($scope);
+	}
 
 	$scope.load_game = function (str) {
 		if (!str) {
 			str = $scope.save_string;
 		}
-		if (str.length === 5) {
-			$scope.seed = str;
-			$scope.spellsCastTotal = Number(prompt("Total spells cast?"));
-			$scope.spellsCastThisAscension = $scope.spellsCastTotal;
-			$scope.update_cookies();
-			return;
+		if(str.length > 10) {
+			str = str.split('!END!')[0];
+			str = Base64.decode(str);
+			str = str.split('|');
+			spl = str[2].split(';');
+			$scope.seed = spl[4];
+			console.log($scope.seed);
+
+			spl = str[4].split(';');
+			$scope.ascensionMode = parseInt(spl[29]);
+			console.log(spl);
+			spl = str[5].split(';');
+			console.log(spl[7]);
+
+			$scope.spellsCastTotal = parseInt(spl[7].split(' ')[2]) || 0;
+			console.log('Total spells cast: ' + $scope.spellsCastTotal);
+
+			$scope.spellsCastThisAscension = parseInt(spl[7].split(' ')[1]) || 0;
+			console.log('Spells cast this ascension: ' + $scope.spellsCastThisAscension);
+			
+			$scope.import_seed = $scope.seed;
+			$scope.import_spells = $scope.spellsCastTotal;
 		}
-		var str = str.split('!END!')[0];
-		str = Base64.decode(str);
-		str = str.split('|');
-		var spl = str[2].split(';');
-		$scope.seed = spl[4];
-		console.log("Seed: " + $scope.seed);
-
-		spl = str[4].split(';');
-		$scope.ascensionMode = parseInt(spl[29]);
-		console.log(spl);
-		spl = str[5].split(';');
-		console.log(spl[7]);
-
-		$scope.spellsCastTotal = parseInt(spl[7].split(' ')[2]) || 0;
-		console.log('Total spells cast: ' + $scope.spellsCastTotal);
-
-		$scope.spellsCastThisAscension = parseInt(spl[7].split(' ')[1]) || 0;
-		console.log('Spells cast this ascension: ' + $scope.spellsCastThisAscension);
+		else {
+			$scope.seed = $scope.import_seed;
+			$scope.spellsCastTotal = parseInt($scope.import_spells);
+		}
 
 		$scope.update_cookies();
 	}
+	
+	$scope.showSeedHelp = function (ev) {
+		$mdDialog.show(
+			$mdDialog.alert()
+			.parent(angular.element(document.querySelector('.content')))
+			.clickOutsideToClose(true)
+			.title('Seed Input')
+			.textContent("If you play on PC, you can just import your save file, which will include your seed and total spells cast. If you play on console, you can't export your save file, so you'll need another way to find your game seed. You can use [this program](https://staticvariablejames.github.io/SeedCracker/) to find your seed for the current ascension.")
+			.ariaLabel('Alert Dialog Demo')
+			.ok('Got it!')
+			.targetEvent(ev)
+		);
+    };
 
 	$scope.update_cookies = function () {
 		$scope.cookies = []
 		$scope.randomSeeds = [];
-		$scope.baseBackfireChance = 0.15 * ($scope.supremeintellect ? 1.1 : 1) * ($scope.diminishineptitude ? 0.1 : 1);
-		$scope.backfireChance = $scope.baseBackfireChance + 0.15 * $scope.on_screen_cookies;
+		$scope.baseBackfireChance = 0.15*($scope.supremeintellect?1.1:1)*($scope.diminishineptitude?0.1:1);
+		$scope.backfireChance = $scope.baseBackfireChance+0.15*$scope.on_screen_cookies;
 		$scope.displayCookies = [];
-		var bsIndices = [];
-		var skipIndices = [];
-		var currentTime = Date.now();
-		for (var i = 0; i < $scope.lookahead; i++) {
-			var currentSpell = i + $scope.spellsCastTotal;
+		bsIndices = [];
+		efIndices = [];
+		cfIndices = [];
+		buffIndices = [] 
+		skipIndices = [];
+		currentTime = Date.now();
+		for (i = 0; i < $scope.lookahead; i++) {
+			currentSpell = i+$scope.spellsCastTotal;
 			Math.seedrandom($scope.seed + '/' + currentSpell);
-			var roll = Math.random();
+			roll = Math.random();
 			$scope.randomSeeds.push(roll);
-
-			var c = []
-			var cookie1Success = check_cookies($scope.spellsCastTotal + i, '', false, true)
-			var cookie2Success = check_cookies($scope.spellsCastTotal + i, '', true, true)
+			
+			$scope.cookies.push([])
+			$scope.displayCookies.push([])
+			cookie1Success = check_cookies($scope.spellsCastTotal + i, '', false, true)
+			cookie2Success = check_cookies($scope.spellsCastTotal + i, '', true, true)
 			//cookie3 = check_cookies($scope.spellsCastTotal + i, '', true)
-			var cookie1Backfire = check_cookies($scope.spellsCastTotal + i, '', false, false)
-			var cookie2Backfire = check_cookies($scope.spellsCastTotal + i, '', true, false)
-			var gambler = check_gambler($scope.spellsCastTotal + i)
-			c.push(cookie1Success)
-			c.push(cookie2Success)
-			c.push(cookie1Backfire)
-			c.push(cookie2Backfire)
-			c.push(gambler)
-			$scope.cookies.push(c)
+			cookie1Backfire = check_cookies($scope.spellsCastTotal + i, '', false, false)
+			cookie2Backfire = check_cookies($scope.spellsCastTotal + i, '', true, false)
+			gambler = check_gambler($scope.spellsCastTotal + i)
+			$scope.cookies[i].push(cookie1Success)
+			$scope.cookies[i].push(cookie2Success)
+			$scope.cookies[i].push(cookie1Backfire)
+			$scope.cookies[i].push(cookie2Backfire)
+			$scope.cookies[i].push(gambler)
 
-			if (cookiesContainBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire) || gambler.hasBs || ($scope.include_ef_in_sequence && gambler.hasEf)) {
-				bsIndices.push(i);
-			}
+			cookiesAsignBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire, i);
+
 
 			if (($scope.skip_abominations && gambler.type == 'Resurrect Abomination') || ($scope.skip_edifices && gambler.type == 'Spontaneous Edifice' && !gambler.backfire)) {
 				skipIndices.push(i);
 			}
-
-			var arr = [];
+			
 			if ($scope.randomSeeds[i] + $scope.backfireChance < 1) {
-				arr.push(c[0]);
-				arr.push(c[1]);
-				if (c[2].type == "Elder Frenzy") { arr[0].type += " (EF)"; arr[0].noteworthy = true; }
-				if (c[3].type == "Elder Frenzy") { arr[1].type += " (EF)"; arr[1].noteworthy = true; }
-				if (c[2].type == "Free Sugar Lump") { arr[0].type += " (Lump)"; }
-				if (c[3].type == "Free Sugar Lump") { arr[1].type += " (Lump)"; }
+				$scope.displayCookies[i].push($scope.cookies[i][0]);
+				$scope.displayCookies[i].push($scope.cookies[i][1]);
+				if ($scope.cookies[i][2].type == "Elder Frenzy") {$scope.displayCookies[i][0].type += " (EF)"; $scope.displayCookies[i][0].noteworthy = true;}
+				if ($scope.cookies[i][3].type == "Elder Frenzy") {$scope.displayCookies[i][1].type += " (EF)"; $scope.displayCookies[i][1].noteworthy = true;}
+				if ($scope.cookies[i][2].type == "Free Sugar Lump") {$scope.displayCookies[i][0].type += " (Lump)";}
+				if ($scope.cookies[i][3].type == "Free Sugar Lump") {$scope.displayCookies[i][1].type += " (Lump)";}
 			}
 			else {
-				arr.push(c[2]);
-				arr.push(c[3]);
-				if (c[0].type == "Building Special") { arr[0].type += " (BS)"; arr[0].noteworthy = true; }
-				if (c[1].type == "Building Special") { arr[1].type += " (BS)"; arr[1].noteworthy = true; }
-				if (c[0].type == "Free Sugar Lump") { arr[0].type += " (Lump)"; }
-				if (c[1].type == "Free Sugar Lump") { arr[1].type += " (Lump)"; }
+				$scope.displayCookies[i].push($scope.cookies[i][2]);
+				$scope.displayCookies[i].push($scope.cookies[i][3]);
+				if ($scope.cookies[i][0].type == "Building Special") {$scope.displayCookies[i][0].type += " (BS)"; $scope.displayCookies[i][0].noteworthy = true;}
+				if ($scope.cookies[i][1].type == "Building Special") {$scope.displayCookies[i][1].type += " (BS)"; $scope.displayCookies[i][1].noteworthy = true;}
+				if ($scope.cookies[i][0].type == "Free Sugar Lump") {$scope.displayCookies[i][0].type += " (Lump)";}
+				if ($scope.cookies[i][1].type == "Free Sugar Lump") {$scope.displayCookies[i][1].type += " (Lump)";}
 			}
-			arr.push(gambler);
-			$scope.displayCookies.push(arr);
+			$scope.displayCookies[i].push(gambler);
 		}
 		console.log($scope.cookies);
 		console.log(bsIndices);
 		console.log(skipIndices);
-		console.log(Date.now() - currentTime);
+		console.log(Date.now()-currentTime);
 
 		$scope.combos = {}
 
-		for (var combo_length = $scope.min_combo_length; combo_length <= $scope.max_combo_length; combo_length++) {
+		for (combo_length = $scope.min_combo_length; combo_length <= $scope.max_combo_length; combo_length++) {
 			$scope.combos[combo_length] = findCombos(combo_length, $scope.max_spread, bsIndices, skipIndices);
 		}
-
+		
+		//$scope.combos = advancedFindCombos($scope.cookies,10,1000);
+		
 		console.log('Combos: ');
 		console.log($scope.combos);
-		console.log(Date.now() - currentTime);
+		console.log(Date.now()-currentTime);
 	}
 
 	$scope.collapse_interface = function (contentId) {
 		console.log("content-" + contentId);
-		if (contentId) {
+		if( contentId) {
 			var content = document.getElementById("content-" + contentId);
 			if (content.style.display === "block") {
 				content.style.display = "none";
@@ -274,16 +233,72 @@ app.controller('myCtrl', function ($scope) {
 	function findCombos(combo_length, max_spread, bsIndices, skipIndices) {
 		let shortestDistance = 10000000;
 		let shortestStart = -1;
-
 		let firstDistance = 10000000;
 		let firstStart = -1
 
-		for (var i = 0; i + combo_length <= bsIndices.length; i++) {
-			let seqStart = bsIndices[i];
-			let seqEnd = bsIndices[i + combo_length - 1];
+		for (i = 0; i + combo_length <= buffIndices.length; i++) {
+
+
+			let seqStart = buffIndices[i];
+			let seqEnd = buffIndices[i + combo_length - 1];
+			let unsableBuffs = []
+			let cfInSeq = false
+			for (j=0; j<=combo_length - 1; j++) {
+			if (cfIndices.includes(buffIndices[i+j]) && !bsIndices.includes(buffIndices[i+j] && !efIndices.includes(buffIndices[i+j]))){
+				var idkWhatToNameThis = j
+				for (k=j+1; k<=combo_length-1; k++){
+				if (cfIndices.includes(buffIndices[i+k]) && !bsIndices.includes(buffIndices[i+k]) && !efIndices.includes(buffIndices[i+k])) {
+					cfInSeq = true
+					unsableBuffs.push(buffIndices[i+k])
+					let efandbs = efIndices.concat(bsIndices).filter(num => num > seqEnd)
+					if (efandbs.length > 0) {
+					seqEnd = Math.min(...efandbs)
+					} else {
+						seqEnd = 99999
+						break
+					}
+				}
+			}
+			break
+			}
+		} 
+		let comboLength = buffIndices.indexOf(seqEnd) - i 
+			for (j=0; j<=comboLength - 1; j++) {
+			if (efIndices.includes(buffIndices[i+j]) && j !== idkWhatToNameThis && !bsIndices.includes(buffIndices[i+j])) {
+				for (k=j+1; k<=comboLength-1; k++){
+				if (efIndices.includes(buffIndices[i+k]) && !bsIndices.includes(buffIndices[i+k]) && k !== idkWhatToNameThis) {
+					unsableBuffs.push(buffIndices[i+k])
+					if (cfInSeq == false) {
+					let bsandcf = cfIndices.concat(bsIndices).filter(num => num > seqEnd)
+					if (bsandcf.length > 0) {
+					seqEnd = Math.min(...bsandcf)
+					} else {
+						seqEnd = 99999
+						break
+					}
+				} else {
+					let upcomingBses = bsIndices.filter(num => num > seqEnd)
+					if (upcomingBses.length > 0) {
+					seqEnd = Math.min(...upcomingBses)
+					} else {
+						seqEnd = 99999
+						break
+					}		
+				}
+			}
+			}
+			break
+			}
+		}
+
+			let a = buffIndices.filter(num => !unsableBuffs.includes(num))
+		
+
+			
+			
 			let baseDistance = seqEnd - seqStart + 1;
 
-			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !bsIndices.includes(idx));
+			let skips = skipIndices.filter((idx) => idx > seqStart && idx < seqEnd && !a.includes(idx));
 
 			let distance = baseDistance - skips.length;
 			if (firstStart == -1 && distance <= combo_length + max_spread) {
@@ -298,74 +313,86 @@ app.controller('myCtrl', function ($scope) {
 		}
 
 		return {
-			shortest: { idx: shortestStart, length: shortestDistance },
-			first: { idx: firstStart, length: firstDistance }
+			shortest: {idx: shortestStart, length: shortestDistance},
+			first: {idx: firstStart, length: firstDistance}
 		};
 	}
+	
+	function calcMaxMagic(level, towers) {
+		return Math.floor(4+Math.pow(towers,0.6)+15*Math.log(1+(towers+10*level-10)/15));
+	}
+	
 
-	function cookiesContainBuffs(include_ef, ...cookies) {
-		return cookies.some((cookie) => {
-			return cookie.type == 'Building Special' || (include_ef && cookie.type == 'Elder Frenzy');
-		});
+
+	function cookiesAsignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, j) {
+		let buffPushed = false
+
+		if (cookie1.type == 'Building Special' || cookie2.type == 'Building Special' || gambler.hasBs) {
+			bsIndices.push(j)
+			buffPushed = true
+		} 
+		if(include_ef == true && (cookie3.type == 'Elder Frenzy' || cookie4.type == 'Elder Frenzy' || gambler.hasEf)){
+			efIndices.push(j)
+			buffPushed = true
+		}
+		if (cookie1.type == 'Click Frenzy' || cookie2.type == 'Click Frenzy' || gambler.hasCf) {
+			cfIndices.push(j)
+			buffPushed = true
+		}
+		if (buffPushed){
+			buffIndices.push(j)
+		}
+
+
+
 	}
 
 	function choose(arr) {
 		return arr[Math.floor(Math.random() * arr.length)];
 	}
 
-	function getSpellCost(spellName) {
-		var spell = $scope.spells[spellName];
-		var out = spell.costMin;
-		if (spell.costPercent) out += $scope.max_magic * spell.costPercent;
-		out *= Math.floor(1 - 0.1 * $scope.supremeintellect);
-		return out;
-	}
-
 	function check_gambler(spellsCast) {
 		Math.seedrandom($scope.seed + '/' + spellsCast);
 
-		var spells = []
-		var selfCost = getSpellCost('gambler\'s fever dream')
-		for (var spell in $scope.spells) { if (spell != 'gambler\'s fever dream' && ($scope.magic - selfCost) >= getSpellCost(spell) * 0.5) spells.push($scope.spells[spell]); }
-		if (spells.length === 0) {
-			return { type: "Not enough mana", icon: "img/img9.png" };
+		spells = [];
+		for (var i in $scope.spells) {
+			if (i != "gambler's fever dream")
+				spells.push($scope.spells[i]);
 		}
+
 		var gfdSpell = choose(spells);
-
-		//simplifying the below cause this isn't patched yet afaict and i'll never be playing with diminished ineptitude backfire
-		var gfdBackfire = gfdSpell.name === "Force the Hand of Fate" ? Math.max(0.5, $scope.backfireChance) : 0.5; /*M.getFailChance(gfdSpell);
+		//simplifying the below cause this isn't patched yet afaict and i'll never be playing with diminished ineptitutde backfire
+		var gfdBackfire = 0.5; /*M.getFailChance(gfdSpell);
     
-		if(FortuneCookie.detectKUGamblerPatch()) gfdBackfire *= 2;
-		else gfdBackfire = Math.max(gfdBackfire, 0.5);*/
+    if(FortuneCookie.detectKUGamblerPatch()) gfdBackfire *= 2;
+    else gfdBackfire = Math.max(gfdBackfire, 0.5);*/
 
-		var gamblerSpell = {};
+		gamblerSpell = {};
 		gamblerSpell.type = gfdSpell.name;
 		gamblerSpell.hasBs = false;
-		gamblerSpell.hasEf = false;
+		gamblerSpell.hasEf = false
+		gamblerSpell.hasCf = false;
 
 		Math.seedrandom($scope.seed + '/' + (spellsCast + 1));
 		if (Math.random() < (1 - gfdBackfire)) {
-			gamblerSpell.icon = "img/img10.png";
 			gamblerSpell.backfire = false;
 
 			if (gfdSpell.name == "Force the Hand of Fate") {
 				gamblerSpell.innerCookie1 = check_cookies(spellsCast + 1, '', false, true);
 				gamblerSpell.innerCookie2 = check_cookies(spellsCast + 1, '', true, true);
-				gamblerSpell.icon = "img/img8.png";
 
 				gamblerSpell.hasBs = gamblerSpell.innerCookie1.type == 'Building Special' || gamblerSpell.innerCookie2.type == 'Building Special';
+				gamblerSpell.hasCf = gamblerSpell.innerCookie1.type == 'Click Frenzy' || gamblerSpell.innerCookie2.type == 'Click Frenzy';
 			}
 
 			//TODO: Do something with edifice to make it clear if it will fail or not. like this:
 			//if(gfdSpell.name == "Spontaneous Edifice") spellOutcome += ' (' + FortuneCookie.gamblerEdificeChecker(spellsCast + 1, true) + ')';
 		} else {
-			gamblerSpell.icon = "img/img11.png";
 			gamblerSpell.backfire = true;
 
 			if (gfdSpell.name == "Force the Hand of Fate") {
 				gamblerSpell.innerCookie1 = check_cookies(spellsCast + 1, '', false, false);
 				gamblerSpell.innerCookie2 = check_cookies(spellsCast + 1, '', true, false);
-				gamblerSpell.icon = "img/img9.png";
 
 				gamblerSpell.hasEf = gamblerSpell.innerCookie1.type == 'Elder Frenzy' || gamblerSpell.innerCookie2.type == 'Elder Frenzy';
 			}
@@ -374,16 +401,15 @@ app.controller('myCtrl', function ($scope) {
 			//if(gfdSpell.name == "Spontaneous Edifice") spellOutcome += ' (' + FortuneCookie.gamblerEdificeChecker(spellsCast + 1, false) + ')';
 		}
 
-		gamblerSpell.hover = gamblerSpell.innerCookie1 && gamblerSpell.innerCookie1.type ? gamblerSpell.innerCookie1.type + '; ' + gamblerSpell.innerCookie2.type : gamblerSpell.type
 		return gamblerSpell;
 	}
 
 	function check_cookies(spells, season, chime, forcedGold) {
 		Math.seedrandom($scope.seed + '/' + spells);
-		var roll = Math.random()
-		if (forcedGold !== false && (forcedGold || roll < (1 - (0.15 * $scope.on_screen_cookies + 0.15 * (1 + 0.1 * $scope.supremeintellect) * (1 - 0.9 * $scope.diminishineptitude))))) {
+		roll = Math.random()
+		if (forcedGold !== false && (forcedGold || roll < (1 - (0.15*$scope.on_screen_cookies + 0.15*(1 + 0.1*$scope.supremeintellect)*(1 - 0.9*$scope.diminishineptitude))))) {
 			/* Random is called a few times in setting up the golden cookie */
-			if (chime == 1) Math.random();
+			if (chime == 1 && $scope.ascensionMode != 1) Math.random();
 			if (season == 'valentines' || season == 'easter') {
 				Math.random();
 			}
@@ -398,25 +424,24 @@ app.controller('myCtrl', function ($scope) {
 			if (Math.random() < 0.25) choices.push('Building Special');
 			if (Math.random() < 0.15) choices = ['Cookie Storm Drop'];
 			if (Math.random() < 0.0001) choices.push('Free Sugar Lump');
-			var cookie = {}
+			cookie = {}
 			cookie.wrath = false
 			cookie.type = choose(choices);
-			cookie.icon = $scope.change_icons ? cookie.type === 'Cursed Finger' || cookie.type === 'Clot' || cookie.type === 'Cookie Storm' ? "img/img6.png" : cookie.type === 'Elder Frenzy' ? "img/img2.png" : cookie.type === 'Building Special' || cookie.type === 'Click Frenzy' ? "img/img3.png" : cookie.type === 'Frenzy' ? "img/img4.png" : "img/img5.png" : "img/GoldCookie.png";
 			if (cookie.type == 'Frenzy') cookie.description = "Gives x7 cookie production for 77 seconds.";
-			if (cookie.type == 'Lucky') cookie.description = "Gain 13 cookies, plus the lesser of 15% of bank or 15 minutes of production.";
+			if (cookie.type == 'Lucky') cookie.description = "Gain 13 cookies plus the lesser of 15% of bank or 15 minutes of production.";
 			if (cookie.type == 'Click Frenzy') cookie.description = "Gives x777 cookies per click for 13 seconds.";
-			if (cookie.type == 'Blab') cookie.description = "Does nothing but contains a funny message.";
-			if (cookie.type == 'Cookie Storm') cookie.description = "Golden cookies fill the screen, each granting you 1 to 7 minutes worth of cookies.";
-			if (cookie.type == 'Cookie Storm Drop') cookie.description = "Grants 1 to 7 minutes worth of production.";
+			if (cookie.type == 'Blab') cookie.description = "Does nothing but has a funny message.";
+			if (cookie.type == 'Cookie Storm') cookie.description = "A massive amount of Golden Cookies appears for 7 seconds, each granting you 1–7 minutes worth of cookies.";
+			if (cookie.type == 'Cookie Storm Drop') cookie.description = "Gain cookies equal to 1-7 minutes production";
 			if (cookie.type == 'Building Special') {
 				cookie.description = "Get a variable bonus to cookie production for 30 seconds.";
 				cookie.noteworthy = true;
 			}
-			if (cookie.type == 'Free Sugar Lump') cookie.description = "Gives you a free sugar lump.";
+			if (cookie.type == 'Free Sugar Lump') cookie.description = "Add a free sugar lump to the pool";
 			return cookie;
 		} else {
 			/* Random is called a few times in setting up the golden cookie */
-			if (chime == 1) Math.random();
+			if (chime == 1 && $scope.ascensionMode != 1) Math.random();
 			if (season == 'valentines' || season == 'easter') {
 				Math.random();
 			}
@@ -429,19 +454,18 @@ app.controller('myCtrl', function ($scope) {
 			if (Math.random() < 0.1) choices.push('Cursed Finger', 'Elder Frenzy');
 			if (Math.random() < 0.003) choices.push('Free Sugar Lump');
 			if (Math.random() < 0.1) choices = ['Blab'];
-			var cookie = {}
+			cookie = {}
 			cookie.wrath = true
 			cookie.type = choose(choices);
-			cookie.icon = $scope.change_icons ? cookie.type === 'Cursed Finger' || cookie.type === 'Clot' || cookie.type === 'Cookie Storm' ? "img/img6.png" : cookie.type === 'Elder Frenzy' ? "img/img2.png" : cookie.type === 'Building Special' || cookie.type === 'Click Frenzy' ? "img/img3.png" : cookie.type === 'Frenzy' ? "img/img4.png" : "img/img5.png" : "img/WrathCookie.png";
 			if (cookie.type == 'Clot') cookie.description = "Reduce production by 50% for 66 seconds.";
-			if (cookie.type == 'Ruin') cookie.description = "Lose 13 cookies plus the lesser of 5% of bank or 15 minutes of production.";
+			if (cookie.type == 'Ruin') cookie.description = "Lose 13 cookies plus the lesser of 5% of bank or 15 minutes of production";
 			if (cookie.type == 'Cursed Finger') cookie.description = "Cookie production halted for 10 seconds, but each click is worth 10 seconds of production.";
 			if (cookie.type == 'Blab') cookie.description = "Does nothing but has a funny message.";
 			if (cookie.type == 'Elder Frenzy') {
-				cookie.description = "Gives x666 cookie production for 6 seconds.";
+				cookie.description = "Gives x666 cookie production for 6 seconds";
 				cookie.noteworthy = true;
 			}
-			if (cookie.type == 'Free Sugar Lump') cookie.description = "Gives you a free sugar lump.";
+			if (cookie.type == 'Free Sugar Lump') cookie.description = "Add a free sugar lump to the pool";
 			return cookie;
 		}
 	}
@@ -480,7 +504,7 @@ app.controller('myCtrl', function ($scope) {
 				return fail + 0.15 * Game.shimmerTypes['golden'].n;
 			},
 			win: function () {
-				var newShimmer = new Game.shimmer('golden', { noWrath: true });
+				var newShimmer = new Game.shimmer('golden', {noWrath: true});
 				var choices = [];
 				choices.push('frenzy', 'multiply cookies');
 				if (!Game.hasBuff('Dragonflight')) choices.push('click frenzy');
@@ -496,7 +520,7 @@ app.controller('myCtrl', function ($scope) {
 				Game.Popup('<div style="font-size:80%;">Promising fate!</div>', Game.mouseX, Game.mouseY);
 			},
 			fail: function () {
-				var newShimmer = new Game.shimmer('golden', { wrath: true });
+				var newShimmer = new Game.shimmer('golden', {wrath: true});
 				var choices = [];
 				choices.push('clot', 'ruin cookies');
 				if (Math.random() < 0.1) choices.push('cursed finger', 'blood frenzy');
@@ -641,7 +665,7 @@ app.controller('myCtrl', function ($scope) {
 				setTimeout(function (spell, cost, seed) {
 					return function () {
 						if (Game.seed != seed) return false;
-						var out = M.castSpell(spell, { cost: cost, failChanceMax: 0.5, passthrough: true });
+						var out = M.castSpell(spell, {cost: cost, failChanceMax: 0.5, passthrough: true});
 						if (!out) {
 							M.magic += selfCost;
 							setTimeout(function () {
