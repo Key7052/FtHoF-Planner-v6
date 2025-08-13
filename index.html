@@ -12,36 +12,54 @@
     <script src="base64.js"></script>
     <script src="index.js"></script>
 
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico?">
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 
 
-    <title>FtHoF Planner v6</title>
+    <title>FtHoF Planner v5</title>
 </head>
 <body>
 <md-toolbar>
     <div class="md-toolbar-tools">
         <h1>
-            <span>Cookie Clicker FtHoF Planner v6</span>
+            <span>Cookie Clicker FtHoF Planner v5</span>
         </h1>
     </div>
 </md-toolbar>
-<div ng-app="myApp" ng-controller="myCtrl" class="{{(dark_mode ? 'dark' : 'normal') + (default_font ? ' default' : '')}}">
+<md-dialog>
+</md-dialog>
+<div ng-app="myApp" ng-controller="myCtrl" data-ng-init="loadParams()">
     <div class="content">
         <div layout="row">
             <md-input-container flex>
-                <label>Save Code/Seed</label>
+                <label>Save Code</label>
                 <input onClick="this.select();" ng-model="save_string" style="color: grey;">
             </md-input-container>
-            <md-button class="md-raised md-primary" ng-click="load_game()">Import Save or Seed</md-button>
+            <md-button class="md-raised md-primary" ng-click="load_game()">Import Save</md-button>
         </div>
-
-        <p></p><b>Based on FtHoF planner v1, v2, v3, v4, and v5 by RebelKeithy, Skeezy, Eminenti, Mylaaan, and Joseph. Huge thanks to them for
-        creating such a helpful (and moddable) tool!</br>
-        The current version is compatible with cookie clicker 2.052, "often imitated, never duplicated". You can find combo data in the console logs!
-        <br>
-        <md-button class="md-raised md-primary" ng-click="collapse_interface(1)">Version History</md-button></b></p>
+		
+		<div layout="row">
+			<md-button class="md-raised md-primary" ng-click="collapse_interface(4)" style="min-width: 25px; height: 25px;">?</md-button>
+            <md-input-container>
+                <label>Seed</label>
+                <input onClick="this.select();" ng-model="import_seed" style="color: grey;" md-maxlength="5">
+            </md-input-container>
+            <md-input-container>
+                <label>Total Spells Cast</label>
+                <input onClick="this.select();" ng-model="import_spells" style="color: grey;">
+            </md-input-container>
+        </div>
+		<div class="collapse-content" id="content-4">
+		<p>If you play on PC, you can just import your save file, which will include your seed and total spells cast. If you play on console, you can't export your save file, so you'll need another way to find your game seed. You can use <a href="https://staticvariablejames.github.io/SeedCracker/">this program</a> to find your seed for the current ascension. I may make a newer version of this program at some point, with support for other seeded events.</p>
+        </div>
+		
+        <p></p><b>Based on FtHoF planner v1, v2, v3, v4 by RebelKeithy, Skeezy, Eminenti, and Mylaaan. Huge thanks to them for
+        creating such
+        a helpful tool.</br>
+        The current version is compatible with cookie clicker 2.052, "often imitated, never duplicated".
+        <md-button class="md-raised md-primary" ng-click="collapse_interface(1)">see here</md-button>
+        for the full version history, credits & contacts.</b></p>
         <div class="collapse-content" id="content-1">
             <ul>
                 <li><a href="http://fthof-planner.s3-website.us-east-2.amazonaws.com/">FtHoF planner V1</a> by
@@ -57,7 +75,7 @@
                     <a href="https://discord.gg/cookie">@skeezy</a> (discord)
                     <ul>
                         <li>The second version of the FtHoF planner with undeniable the biggest update to it to date.
-                            The new version also made it possible to have a look into Gambler's Fever Dream and a
+                            The new version also made it possible to have a look into the Gambler's Fever Dream and a
                             combo-finder was added which made it more easy to actually find them.
                         </li>
                     </ul>
@@ -67,8 +85,8 @@
                     <ul>
                         <li>The third version was mainly a bugfix because of a bugfix. The original and second FtHoF
                             planners made use (just like the original cookie clicker) of a second possible change to
-                            alter the outcome of FtHoF (the chime sound). This was a bug and fixed by Orteil. This broke the first 2
-                            planners and was fixed in V3. Later on, the combo-finder was fixed to not to calculate those
+                            alter the outcome of FtHoF. This was a bug and fixed by Orteil. This broke the first 2
+                            planners and was fixed in V3. Later also the combo-finder was fixed not to calculate those
                             outcomes for Gambler's Fever Dream.
                         </li>
                     </ul>
@@ -76,8 +94,8 @@
                 <li><a href="https://mylaaan.github.io/FtHoF-Planner-v4/">FtHoF planner v4</a> by
                     <a href="https://discord.gg/cookie">@mylaaan</a> (discord)
                     <ul>
-                        <li>The fourth version only added ease of use interface options, such as the "Cast Spell" button to
-                            make it easier to keep track of where you are without importing the save again. It also updated
+                        <li>The fourth version only added ease of use interface options. Like the "Cast Spell" button to
+                            make it easier to keep track of where you are without importing the save again. Also updated
                             some visual features and removed Google Analytics.
                         </li>
                     </ul>
@@ -89,29 +107,25 @@
                         </li>
                     </ul>
                 </li>
-				<li><a href="https://plasma4.github.io/FtHoF-Planner-v6/">FtHoF planner v6</a> by
-                    <a href="https://discord.gg/cookie">@1_e0</a> (discord)
-                    <ul>
-                        <li>This version introduces the option to directly import a seed, more info on Gambler's Fever Dream offset abuse, particularly for Gambler's Fever Dream casts that return FtHoF by hovering over a particular FtHoF GFD cell, and some more UI options. You can also view a short description of what a golden or wrath cookie does by hovering over that cell. Some other things that have not been added yet are planned, such as a combo finder (simulates theoretical combos through brute-force, with gfd consideration, but with customizable combo options)
-                        </li>
-                    </ul>
-                </li>
 
                 <md-divider style="margin: 1em 0;"></md-divider>
-                <li>For feature requests or bug reports, tell me on the Dashnet Forums Discord server.
+                <li>For added features or bugs open an issue on <a
+                        href="https://github.com/joseph3079/FtHoF-Planner-v5/issues">GitHub</a> or make it yourself
+                    and make a pull request. I will credit you of course.
                 </li>
-                <li>If you make a bug report, please add the save export. This makes it easier to visualise
+                <li>If you do make a bug report please add the save export. This makes it easier to visualise
                     the problem you're facing and I can make sure it is fixed instead of almost being sure.
                 </li>
                 </li>
             </ul>
         </div>
-        <md-button class="md-raised md-primary" ng-click="collapse_interface(2)">Guide</md-button>
+
+        <p>RebelKeithy, Skeezy, Mylaaan, & I made a guide explaining the options/features we added which can be
+            <md-button class="md-raised md-primary" ng-click="collapse_interface(2)">found here</md-button>
         </p>
         <div class="collapse-content" id="content-2">
-            Guide from RebelKeithy, Skeezy, Mylaaan, and Joseph:
             <ul>
-                <pre>RebelKeithy</pre>
+                <pre>&lt;RebelKeithy&gt;</pre>
 
                 <li>
                     <b>Force the Hand of Fate is not completely random, it is based on your game's seed (which changes
@@ -139,7 +153,8 @@
                     </ul>
                 </li>
 
-                <pre>Skeezy</pre>
+                <pre>&lt;/RebelKeithy&gt;</pre>
+                <pre>&lt;Skeezy&gt;</pre>
 
                 <li>
                     <b>Combo search: Once you import a save file, the planner will display both the earliest and
@@ -189,15 +204,16 @@
                 <li>Building Specials and Elder Frenzies are highlighted yellow</li>
                 <li>Rows skippable via Gambler's have their Gambler's spell highlighted blue.</li>
 
-                <pre>Mylaaan</pre>
+                <pre>&lt;/Skeezy&gt;</pre>
+                <pre>&lt;Mylaaan&gt;</pre>
 
                 <li>
                     <b>Cast Spell and Apply Settings:</b>
                     <ul>
-                        <li>The Cast Spell button will forward the whole list 1 spell. It will also apply all settings,
-                            so if you have changed them, the outcome for future spells may change. If you have to cast
-                            FtHoF for a CF first you want to keep that cookie on screen, so you can increase the amount
-                            of golden cookies on screen at the same time.
+                        <li>The Cast Spell button will forward the whole list 1 spell. It will also apply all settings
+                            so if you have changed them the outcome for future spells may change. If you have to cast
+                            FtHoF for a CF first you want to keep that cookie on screen, this way you can up the "Golden
+                            Cookies on screen" and then cast spell
                         </li>
                         <li>If you made progress you don't want to click the Import Save button as it will reset your
                             manually cast spells. You can use Apply Settings to change stuff up without losing track.
@@ -212,8 +228,9 @@
                     button is a placebo or a placeholder for future implementation. The game and the planner do
                     currently not step out of line when using the aura without any update to the planner.
                 </li>
-
-                <pre>Joseph3079</pre>
+                <pre>&lt;/Mylaaan&gt;</pre>
+				
+                <pre>&lt;Joseph3079&gt;</pre>
 				
 				<li>
                     <b>Random Seed column:</b>
@@ -226,19 +243,11 @@
                 </li>
 				<li>The Supreme Intellect checkbox now actually works. Note that Supreme Intellect and Diminish Ineptitude multiply the base 15% backfire chance, and then the 15% increase in backfire chance per on screen GC is added afterward, so a cast with a successful DI, SI active, and 3 on screen GCs would have a 46.65% chance of backfiring, which would mean any spell with a random seed less than 0.5335 would succeed.
                 </li>
+                <pre>&lt;/Joseph3079&gt;</pre>
             </ul>
         </div>
 
         <md-divider></md-divider>
-
-        <!-- <md-button class="md-raised md-primary" ng-click="calculate_combos()">Calculate Combos (advanced)</md-button>
-        (Locate more complex combos up to the lookahead with this button. The information below is not used for normal calculations.)
-        <br>
-        <label>Wizard Tower level <input type="number" ng-model="level" min=1></label>
-        <label>Wanted amount of Building Specials <input type="number" ng-model="wantedBS" min=1></label>
-        <br>
-        <label>Configuration data<br><textarea ng-model="config" rows="5" cols="30" placeholder="522fthof 52di/F 22fthof R+522fthof..."></textarea></label>
-        <br> -->
 
         <ul ng-if="combos">
             <li class="combo-listitem" ng-repeat="combo in combos">
@@ -250,7 +259,7 @@
                     <li ng-if="combo.first.idx != -1"><a href="#{{combo.first.idx}}">Earliest:</a> Length
                         {{combo.first.length}}; spread {{combo.first.length - ($index + min_combo_length)}}; starting at
                         <a href="#{{combo.first.idx}}">spell #{{combo.first.idx+1}}</a></li>
-                    <li ng-if="combo.first.idx == -1">No combo of this length with spread below {{max_spread+1}}</li>
+                    <li ng-if="combo.first.idx == -1">No combo of this length with spread <= {{max_spread}}</li>
                     <li><a href="#{{combo.shortest.idx}}">Shortest:</a> Length {{combo.shortest.length}}; spread
                         {{combo.shortest.length - ($index + min_combo_length)}}; starting at <a
                                 href="#{{combo.shortest.idx}}">spell #{{combo.shortest.idx+1}}</a></li>
@@ -259,30 +268,21 @@
         </ul>
 
         <md-divider></md-divider>
-        <br>
-        <md-checkbox ng-model="dark_mode" checkd>
-            Dark Mode
-        </md-checkbox>
-        <md-checkbox ng-model="default_font" checked>
-            Default Font
-        </md-checkbox>
-        <br>
-        <b>Options:</b>
-        <br>
-        <label>Lookahead Length <input type="number" ng-model="lookahead" min=10 max=100000></label>
 
-        <label>Min Combo <input type="number" ng-model="min_combo_length" min=1 max=20></label>
-
-        <label>Max Combo <input type="number" ng-model="max_combo_length" min=1 max=20></label>
-
-        <label>Max Spread <input type="number" ng-model="max_spread" min=0 max=99></label>
-        <br>
-        <b>(These two options are only used for GFD)</b>
-        <label>Current Mana <input type="number" ng-model="magic" min=0 max=1000></label>
-        <label>Maximum Mana <input type="number" ng-model="max_magic" min=0 max=1000></label>
+        <label>Lookahead length</label>
+        <input type="number" ng-model="lookahead" min=10 max=50000>
 
         <md-divider></md-divider>
-        <br>
+
+        <label>Min Combo</label>
+        <input type="number" ng-model="min_combo_length" min=1 max=20>
+
+        <label>Max Combo</label>
+        <input type="number" ng-model="max_combo_length" min=1 max=20>
+
+        <label>Max Spread</label>
+        <input type="number" ng-model="max_spread" min=0 max=99>
+
         <md-checkbox ng-checked=true ng-model="include_ef_in_sequence" aria-label="Include Elder Frenzy">
             Include Elder Frenzies
         </md-checkbox>
@@ -295,23 +295,21 @@
             Skip Spontaneous Edifices
         </md-checkbox>
 
-        <md-checkbox ng-model="change_icons" aria-label="Change Icons">
-            Combo-focused Icons
-        </md-checkbox>
 
         <md-divider></md-divider>
 
-        <label>Golden+Wrath Cookies on screen <input type="number" ng-model="on_screen_cookies" min=0 max=10></label>
+        <label>Golden Cookies on screen</label>
+        <input type="number" ng-model="on_screen_cookies" min=0 max=10>
 
-        <md-checkbox class="c2" ng-model="dragonflight" aria-label="Dragonflight Buff Active">
+        <md-checkbox ng-model="dragonflight" aria-label="Dragonflight Buff Active">
             Dragonflight Buff Active
         </md-checkbox>
 
-        <md-checkbox class="c2" ng-model="supremeintellect" aria-label="Supreme Intellect Aura Active">
+        <md-checkbox ng-model="supremeintellect" aria-label="Supreme Intellect Aura Active">
             Supreme Intellect Aura Active
         </md-checkbox>
 
-        <md-checkbox class="c2" ng-model="diminishineptitude" aria-label="Diminish Ineptitude Active">
+        <md-checkbox ng-model="diminishineptitude" aria-label="Diminish Ineptitude Active">
             Diminish Ineptitude Active
         </md-checkbox>
 
@@ -320,6 +318,7 @@
 
         <md-button class="md-raised md-primary" ng-click="update_cookies()">Apply Settings</md-button>
         <md-button class="md-raised md-primary" ng-click="cast_spell()">Cast Spell</md-button>
+        <!-- <md-button class="md-raised md-primary" ng-click="print_scope()">Print Scope</md-button> -->
 
         <md-divider></md-divider>
 
@@ -373,8 +372,8 @@
                 <md-content>
                     <md-list flex>
                         <md-subheader class="md-no-sticky">Season is not Easter or Valentines.</md-subheader>
-                        <md-list-item class="md-2-line" ng-repeat="cookie_list in displayCookies" ng-click="null" title="{{cookie_list[0].description}}">
-                            <img ng-src='{{cookie_list[0].icon}}'
+                        <md-list-item class="md-2-line" ng-repeat="cookie_list in displayCookies" ng-click="null">
+                            <img ng-src={{cookie_list[0].wrath?"img/WrathCookie.png":"img/GoldCookie.png"}}
                                  class="md-avatar" alt="Golden Cookie"/>
                             <div class="md-list-item-text{{cookie_list[0].noteworthy ? ' highlightCombo' : ''}}"
                                  layout="column">
@@ -400,8 +399,8 @@
                 <md-content>
                     <md-list flex>
                         <md-subheader class="md-no-sticky">Season is Easter or Valentines.</md-subheader>
-                        <md-list-item class="md-2-line" ng-repeat="cookie_list in displayCookies" ng-click="null" title="{{cookie_list[1].description}}">
-                            <img ng-src='{{cookie_list[1].icon}}'
+                        <md-list-item class="md-2-line" ng-repeat="cookie_list in displayCookies" ng-click="null">
+                            <img ng-src={{cookie_list[1].wrath?"img/WrathCookie.png":"img/GoldCookie.png"}}
                                  class="md-avatar" alt="Golden Cookie"/>
                             <div class="md-list-item-text{{cookie_list[1].noteworthy ? ' highlightCombo' : ''}}"
                                  layout="column">
@@ -420,11 +419,14 @@
                 </md-toolbar>
                 <md-content>
                     <md-list flex>
-                        <md-subheader class="md-no-sticky">The outcome of Gambler's Fever Dream.</md-subheader>
-                        <md-list-item class="md-2-line" ng-init="hoverText = cookie_list[2].type" ng-mouseover="hoverText = cookie_list[2].hover" ng-click="hoverText = cookie_list[2].hover" ng-mouseleave="hoverText = cookie_list[2] ? cookie_list[2].type : 'Blank'" ng-repeat="cookie_list in displayCookies" ng-click="null">
-                            <img ng-src='{{cookie_list[2].icon}}' class="md-avatar md-pixelated" alt="Golden Cookie"/>
-                            <div class="md-list-item-text{{(cookie_list[2].hasBs || cookie_list[2].hasEf) ? ' highlightCombo' : cookie_list[2].type == 'Resurrect Abomination' || (cookie_list[2].type == 'Spontaneous Edifice' && !cookie_list[2].backfire) ? ' highlightSkip' : ''}}" layout="column">
-                                <h3>{{hoverText}}</h3>
+                        <md-subheader class="md-no-sticky">Gambler's Fever Dream</md-subheader>
+                        <md-list-item class="md-2-line" ng-repeat="cookie_list in displayCookies">
+                            <img ng-src={{cookie_list[2].backfire?"img/WrathCookie.png":"img/GoldCookie.png"}}
+                                 class="md-avatar" alt="Golden Cookie"/>
+                            <div class="md-list-item-text{{(cookie_list[2].hasBs || cookie_list[2].hasEf) ? ' highlightCombo' : cookie_list[2].type == 'Resurrect Abomination' || (cookie_list[2].type == 'Spontaneous Edifice' && !cookie_list[2].backfire) ? ' highlightSkip' : ''}}"
+                                 layout="column">
+                                <h3 title="{{cookie_list[2].innerCookie1.type + '; ' + cookie_list[2].innerCookie2.type}}">
+                                    {{cookie_list[2] ? cookie_list[2].type : "Blank"}}</h3>
                             </div>
                         </md-list-item>
                     </md-list>
