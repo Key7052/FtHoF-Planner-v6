@@ -150,7 +150,7 @@ app.controller('myCtrl', function ($scope) {
 		bsIndices = [];
 		efIndices = [];
 		cfIndices = [];
-		buffIndices = [] 
+		buffIndices = []; 
 		skipIndices = [];
 		currentTime = Date.now();
 		for (i = 0; i < $scope.lookahead; i++) {
@@ -173,7 +173,7 @@ app.controller('myCtrl', function ($scope) {
 			$scope.cookies[i].push(cookie2Backfire)
 			$scope.cookies[i].push(gambler)
 
-			cookiesAsignBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire, i);
+			cookiesAssignBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire, i);
 
 
 			if (($scope.skip_abominations && gambler.type == 'Resurrect Abomination') || ($scope.skip_edifices && gambler.type == 'Spontaneous Edifice' && !gambler.backfire)) {
@@ -324,23 +324,32 @@ app.controller('myCtrl', function ($scope) {
 	
 
 
-	function cookiesAsignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, j) {
+	function cookiesAssignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, i) {
 		let buffPushed = false
 
 		if (cookie1.type == 'Building Special' || cookie2.type == 'Building Special' || gambler.hasBs) {
-			bsIndices.push(j)
+			bsIndices.push(i)
 			buffPushed = true
-		} 
+		}
+		if (gambler.hasBs) {
+			for (j=1; j<=6; j++) {
+				if (check_gambler(i+$scope.spellsCastTotal-j).type == "Force the Hand of Fate"){
+					bsIndices.push(i-j)
+					buffIndices.push(i-j)
+					bsIndices.sort((a, b) => a - b);
+				} else {break}
+			}
+		}
 		if(include_ef == true && (cookie3.type == 'Elder Frenzy' || cookie4.type == 'Elder Frenzy' || gambler.hasEf)){
-			efIndices.push(j)
+			efIndices.push(i)
 			buffPushed = true
 		}
 		if (cookie1.type == 'Click Frenzy' || cookie2.type == 'Click Frenzy' || gambler.hasCf) {
-			cfIndices.push(j)
+			cfIndices.push(i)
 			buffPushed = true
 		}
 		if (buffPushed){
-			buffIndices.push(j)
+			buffIndices.push(i)
 		}
 
 
