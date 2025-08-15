@@ -332,7 +332,7 @@ app.controller('myCtrl', function ($scope) {
 			buffPushed = true
 		}
 		if (gambler.hasBs) {
-			for (j=1; j<=5; j++) {
+			for (j=1; j<=6; j++) {
 				if (check_gambler(i+$scope.spellsCastTotal-j).type == "Force the Hand of Fate"){
 					if (!bsIndices.includes(i-j)){
 					bsIndices.push(i-j)
@@ -736,3 +736,4 @@ app.controller('myCtrl', function ($scope) {
 		},
 	};
 });
+
