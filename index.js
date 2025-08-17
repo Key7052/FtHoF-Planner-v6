@@ -414,7 +414,7 @@ app.controller('myCtrl', function ($scope) {
 					} else {
 						if (gfd2.type == "Force the Hand of Fate" && !efIndices.concat(bsIndices).includes(i-1)) {
 							addOffset(2,i)
-							removeCf(1,i)
+							removeBuff(1,i)
 							break
 						}
 					}
