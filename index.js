@@ -237,24 +237,24 @@ app.controller('myCtrl', function ($scope) {
 		let firstStart = -1
 
 		for (i = 0; i + combo_length <= buffIndices.length; i++) {
-
-
 			let seqStart = buffIndices[i];
 			let seqEnd = buffIndices[i + combo_length - 1];
 			let unsableBuffs = []
 			let cfInSeq = false
+
+
 			for (j=0; j<=combo_length - 1; j++) {
 			if (cfIndices.includes(buffIndices[i+j]) && !bsIndices.includes(buffIndices[i+j] && !efIndices.includes(buffIndices[i+j]))){
 				var idkWhatToNameThis = j
-				for (k=j+1; k<=combo_length-1; k++){
+				cfInSeq = true
+				for (k=j+1; k<=combo_length-1; k++) {
 				if (cfIndices.includes(buffIndices[i+k]) && !bsIndices.includes(buffIndices[i+k]) && !efIndices.includes(buffIndices[i+k])) {
-					cfInSeq = true
 					unsableBuffs.push(buffIndices[i+k])
 					let efandbs = efIndices.concat(bsIndices).filter(num => num > seqEnd)
 					if (efandbs.length > 0) {
 					seqEnd = Math.min(...efandbs)
 					} else {
-						seqEnd = 99999
+						seqEnd = 10000000
 						break
 					}
 				}
@@ -262,7 +262,8 @@ app.controller('myCtrl', function ($scope) {
 			break
 			}
 		} 
-		let comboLength = buffIndices.indexOf(seqEnd) - i 
+		let comboLength = buffIndices.indexOf(seqEnd) - i
+
 			for (j=0; j<=comboLength - 1; j++) {
 			if (efIndices.includes(buffIndices[i+j]) && j !== idkWhatToNameThis && !bsIndices.includes(buffIndices[i+j])) {
 				for (k=j+1; k<=comboLength-1; k++){
@@ -290,6 +291,8 @@ app.controller('myCtrl', function ($scope) {
 			break
 			}
 		}
+
+
 
 			let a = buffIndices.filter(num => !unsableBuffs.includes(num))
 		
@@ -325,27 +328,117 @@ app.controller('myCtrl', function ($scope) {
 
 
 	function cookiesAssignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, i) {
+		function addOffset(num, i) {
+				if (!bsIndices.includes(i-num)){
+					bsIndices.push(i-num)
+					bsIndices.sort((a, b) => a - b);
+					}
+					if (!buffIndices.includes(i-num)){
+						buffIndices.push(i-num)
+						buffIndices.sort((a, b) => a - b);
+					}
+		}
+		function removeBuff (num, i) {
+			if (cfIndices.includes(i-num)){
+			cfIndices.spilce(i-num)
+			buffIndices.spilce(i-num)
+			}
+			if (efIndices.includes(i-num)){
+			efIndices.spilce(i-num)
+			buffIndices.spilce(i-num)
+		}
+	}
+
 		let buffPushed = false
 
 		if (cookie1.type == 'Building Special' || cookie2.type == 'Building Special' || gambler.hasBs) {
 			bsIndices.push(i)
 			buffPushed = true
 		}
-		if (gambler.hasBs) {
-			for (j=1; j<=6; j++) {
-				if (check_gambler(i+$scope.spellsCastTotal-j).type == "Force the Hand of Fate"){
-					if (!bsIndices.includes(i-j)){
-					bsIndices.push(i-j)
-					bsIndices.sort((a, b) => a - b);
+		if (gambler.hasBs || ($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 0.33333333 && $scope.randomSeeds[i+1] < 0.5)) {
+			if($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 0.33333333 && $scope.randomSeeds[i+1] < 0.5){
+				addOffset(0,i)
+			}
+			let gfd1 = check_gambler(i+$scope.spellsCastTotal-1)
+			let gfd2 = check_gambler(i+$scope.spellsCastTotal-2)
+			let gfd3 = check_gambler(i+$scope.spellsCastTotal-3)
+			let gfd4 = check_gambler(i+$scope.spellsCastTotal-4)
+			let gfd5 = check_gambler(i+$scope.spellsCastTotal-5)
+			let gfd6 = check_gambler(i+$scope.spellsCastTotal-6)
+			for (j=6; j>=1; j--) {
+				if (j == 6) {
+					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate" && gfd4.type == "Force the Hand of Fate" && gfd5.type == "Force the Hand of Fate" && gfd6.type == "Force the Hand of Fate"){
+						addOffset(1,i); addOffset(2,i); addOffset(3, i); addOffset(4, i); addOffset(5,i); addOffset(6,i)
 					}
-					if (!buffIndices.includes(i-j)){
-						buffIndices.push(i-j)
-						buffIndices.sort((a, b) => a - b);
+				} else {
+				if (j == 5) {
+					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate" && gfd4.type == "Force the Hand of Fate" && gfd5.type == "Force the Hand of Fate"){
+						addOffset(1,i); addOffset(2,i); addOffset(3, i); addOffset(4, i); addOffset(5,i)
+					}
+				} else {
+				if (j == 4) {
+					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate" && gfd4.type == "Force the Hand of Fate") {
+						addOffset(1,i); addOffset(2,i); addOffset(3, i); addOffset(4, i)
 					}
 
-				} else {break}
+				} else {
+				if (j==3){
+					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate"){
+						addOffset(1,i); addOffset(2,i); addOffset(3,i)
+					} else {
+					if (gfd3.type == "Force the Hand of Fate" && gfd2.type !== "Force the Hand of Fate" && gfd1.type !== "Force the Hand of Fate" && !efIndices.concat(bsIndices).includes(i-1) && !efIndices.concat(bsIndices).includes(i-2) ) {
+						removeBuff(1,i)
+						removeBuff(2,i)
+						addOffset(3,i)
+					} else {
+						if (gfd3.type == "Force the Hand of Fate" && (gfd2.type == "Force the Hand of Fate" && gfd1.type !== "Force the Hand of Fate") || (gfd2.type !== "Force the Hand of Fate" && gfd1.type == "Force the Hand of Fate" ) && !(efIndices.concat(bsIndices).includes(i-1) && efIndices.concat(bsIndices).includes(i-2) &&efIndices.concat(bsIndices).includes(i-3) ) ) {
+							addOffset(3,i)
+							if (gfd2.type == "Force the Hand of Fate") {
+								removeBuff(1, i);
+								addOffset(2,i)
+
+							} else {
+								removeBuff(2, i)
+								addOffset(1, i)
+							}
+							
+						}
+					}
+				}
+				} else {
+				if (j == 2){
+					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate") {
+						addOffset(1, i)
+						addOffset(2, i)
+						break
+					} else {
+						if (gfd2.type == "Force the Hand of Fate" && !efIndices.concat(bsIndices).includes(i-1)) {
+							addOffset(2,i)
+							removeCf(1,i)
+							break
+						}
+					}
+				} else {
+				if (j == 1){
+				if (gfd1.type == "Force the Hand of Fate"){
+					if (!bsIndices.includes(i-1)){
+					bsIndices.push(i-1)
+					bsIndices.sort((a, b) => a - b);
+					}
+					if (!buffIndices.includes(i-1)){
+						buffIndices.push(i-1)
+						buffIndices.sort((a, b) => a - b);
+					}
+					
+				}
+				}
+				}
+			}
+	}
+				}
 			}
 		}
+	}
 		if(include_ef == true && (cookie3.type == 'Elder Frenzy' || cookie4.type == 'Elder Frenzy' || gambler.hasEf)){
 			efIndices.push(i)
 			buffPushed = true
@@ -736,4 +829,3 @@ app.controller('myCtrl', function ($scope) {
 		},
 	};
 });
-
