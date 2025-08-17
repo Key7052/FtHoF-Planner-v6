@@ -355,7 +355,7 @@ app.controller('myCtrl', function ($scope) {
 			bsIndices.push(i)
 			buffPushed = true
 		}
-		if (gambler.hasBs || ($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 0.33333333 && $scope.randomSeeds[i+1] < 0.5)) {
+		if (gambler.hasBs || ($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 1/3 && $scope.randomSeeds[i+1] < 0.5 && bsIndices.includes(i+1))) {
 			if($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 0.33333333 && $scope.randomSeeds[i+1] < 0.5){
 				addOffset(0,i)
 			}
