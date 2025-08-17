@@ -344,7 +344,7 @@ app.controller('myCtrl', function ($scope) {
 			buffIndices.splice(buffIndices.indexOf(i-num),1)
 			}
 			if (efIndices.includes(i-num)){
-			efIndices.splice(efIndices.ndexOf(i-num), 1)
+			efIndices.splice(efIndices.indexOf(i-num), 1)
 			buffIndices.splice(buffIndices.indexOf(i-num),1)
 		}
 	}
