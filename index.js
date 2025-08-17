@@ -340,12 +340,12 @@ app.controller('myCtrl', function ($scope) {
 		}
 		function removeBuff (num, i) {
 			if (cfIndices.includes(i-num)){
-			cfIndices.spilce(i-num)
-			buffIndices.spilce(i-num)
+			cfIndices.spilce(indexOf(i-num), 1)
+			buffIndices.spilce(indexOf(i-num),1)
 			}
 			if (efIndices.includes(i-num)){
-			efIndices.spilce(i-num)
-			buffIndices.spilce(i-num)
+			efIndices.spilce(indexOf(i-num), 1)
+			buffIndices.spilce(indexOf(i-num),1)
 		}
 	}
 
