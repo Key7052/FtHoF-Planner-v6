@@ -239,9 +239,10 @@ app.controller('myCtrl', function ($scope) {
 		for (i = 0; i + combo_length <= buffIndices.length; i++) {
 			let seqStart = buffIndices[i];
 			let seqEnd = buffIndices[i + combo_length - 1];
+			let seqLength = buffIndices.indexOf(seqEnd) - buffIndices.indexOf(seqStart)
 			let unsableBuffs = []
 			let cfInSeq = false
-
+			let thing = []
 
 			for (j=0; j<=combo_length - 1; j++) {
 			if (cfIndices.includes(buffIndices[i+j]) && !bsIndices.includes(buffIndices[i+j] && !efIndices.includes(buffIndices[i+j]))){
@@ -253,6 +254,7 @@ app.controller('myCtrl', function ($scope) {
 					let efandbs = efIndices.concat(bsIndices).filter(num => num > seqEnd)
 					if (efandbs.length > 0) {
 					seqEnd = Math.min(...efandbs)
+					thing.push(seqEnd)
 					} else {
 						seqEnd = 10000000
 						break
@@ -264,9 +266,10 @@ app.controller('myCtrl', function ($scope) {
 		} 
 		let comboLength = buffIndices.indexOf(seqEnd) - i
 
-			for (j=0; j<=comboLength - 1; j++) {
+		if (seqEnd < 99999) {
+			for (j=0; j<=comboLength; j++) {
 			if (efIndices.includes(buffIndices[i+j]) && j !== idkWhatToNameThis && !bsIndices.includes(buffIndices[i+j])) {
-				for (k=j+1; k<=comboLength-1; k++){
+				for (k=j+1; k<=comboLength; k++){
 				if (efIndices.includes(buffIndices[i+k]) && !bsIndices.includes(buffIndices[i+k]) && k !== idkWhatToNameThis) {
 					unsableBuffs.push(buffIndices[i+k])
 					if (cfInSeq == false) {
@@ -291,7 +294,7 @@ app.controller('myCtrl', function ($scope) {
 			break
 			}
 		}
-
+	}
 
 
 			let a = buffIndices.filter(num => !unsableBuffs.includes(num))
