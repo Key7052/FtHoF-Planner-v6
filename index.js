@@ -336,9 +336,9 @@ app.controller('myCtrl', function ($scope) {
 					bsIndices.push(i-num)
 					bsIndices.sort((a, b) => a - b);
 					}
-					if (!buffIndices.includes(i-num)){
-						buffIndices.push(i-num)
-						buffIndices.sort((a, b) => a - b);
+				if (!buffIndices.includes(i-num)){
+					buffIndices.push(i-num)
+					buffIndices.sort((a, b) => a - b);
 					}
 		}
 		function removeBuff (num, i) {
@@ -352,94 +352,118 @@ app.controller('myCtrl', function ($scope) {
 		}
 	}
 
+		function buffRemoval (num, i){
+			if (bsIndices.includes(i-num) || efIndices.includes(i-num)){
+			return true
+		} else {
+			return false
+		}
+		}
+
 		let buffPushed = false
 
 		if (cookie1.type == 'Building Special' || cookie2.type == 'Building Special' || gambler.hasBs) {
 			bsIndices.push(i)
 			buffPushed = true
 		}
-		if (gambler.hasBs || ($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 1/3 && $scope.randomSeeds[i+1] < 0.5 && (check_cookies($scope.spellsCastTotal + i + 1, '', false, true) == "Building Special" || check_cookies($scope.spellsCastTotal + i + 1, '', true, true) == "Building Special"))) {
-			if($scope.randomSeeds[i] > 0.25 && $scope.randomSeeds[i] < 1/3 && $scope.randomSeeds[i+1] < 0.5 && (check_cookies($scope.spellsCastTotal + i + 1, '', false, true) == "Building Special" || check_cookies($scope.spellsCastTotal + i + 1, '', true, true) == "Building Special")){
-				addOffset(0,i)
-			}
+		if (gambler.hasBs || ($scope.randomSeeds[i] > 2/8 && $scope.randomSeeds[i] < 2/7 && $scope.randomSeeds[i+1] < 0.5 && (check_cookies($scope.spellsCastTotal + i + 1, '', false, true) == "Building Special" || check_cookies($scope.spellsCastTotal + i + 1, '', true, true) == "Building Special"))) {
 			let gfd1 = check_gambler(i+$scope.spellsCastTotal-1)
 			let gfd2 = check_gambler(i+$scope.spellsCastTotal-2)
 			let gfd3 = check_gambler(i+$scope.spellsCastTotal-3)
 			let gfd4 = check_gambler(i+$scope.spellsCastTotal-4)
 			let gfd5 = check_gambler(i+$scope.spellsCastTotal-5)
 			let gfd6 = check_gambler(i+$scope.spellsCastTotal-6)
-			for (j=6; j>=1; j--) {
-				if (j == 6) {
-					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate" && gfd4.type == "Force the Hand of Fate" && gfd5.type == "Force the Hand of Fate" && gfd6.type == "Force the Hand of Fate"){
-						addOffset(1,i); addOffset(2,i); addOffset(3, i); addOffset(4, i); addOffset(5,i); addOffset(6,i)
-					}
-				} else {
-				if (j == 5) {
-					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate" && gfd4.type == "Force the Hand of Fate" && gfd5.type == "Force the Hand of Fate"){
-						addOffset(1,i); addOffset(2,i); addOffset(3, i); addOffset(4, i); addOffset(5,i)
-					}
-				} else {
-				if (j == 4) {
-					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate" && gfd4.type == "Force the Hand of Fate") {
-						addOffset(1,i); addOffset(2,i); addOffset(3, i); addOffset(4, i)
-					}
+			for (j=6; j>1; j--) {
+				let removedBuffCount = 0
+				let addedBuffCount = 0
+				let removedBuffs = []
+				let addedBuffs = []
+				if (j == 6){
+					addedBuffCount++
+					addedBuffs.push(j)
+					if (gfd5.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(5)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(5)}}
+					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
 
-				} else {
-				if (j==3){
-					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate" && gfd3.type == "Force the Hand of Fate"){
-						addOffset(1,i); addOffset(2,i); addOffset(3,i)
-					} else {
-					if (gfd3.type == "Force the Hand of Fate" && gfd2.type !== "Force the Hand of Fate" && gfd1.type !== "Force the Hand of Fate" && !efIndices.concat(bsIndices).includes(i-1) && !efIndices.concat(bsIndices).includes(i-2) ) {
-						removeBuff(1,i)
-						removeBuff(2,i)
-						addOffset(3,i)
-					} else {
-						if (gfd3.type == "Force the Hand of Fate" && (gfd2.type == "Force the Hand of Fate" && gfd1.type !== "Force the Hand of Fate") || (gfd2.type !== "Force the Hand of Fate" && gfd1.type == "Force the Hand of Fate" ) && !(efIndices.concat(bsIndices).includes(i-1) && efIndices.concat(bsIndices).includes(i-2) &&efIndices.concat(bsIndices).includes(i-3) ) ) {
-							addOffset(3,i)
-							if (gfd2.type == "Force the Hand of Fate") {
-								removeBuff(1, i);
-								addOffset(2,i)
-
-							} else {
-								removeBuff(2, i)
-								addOffset(1, i)
-							}
-							
+					if (addedBuffCount > removedBuffCount){
+						for (k = 0; k < addedBuffs.length; k++) {
+							addOffset(addedBuffs[k], i)
 						}
-					}
-				}
-				} else {
-				if (j == 2){
-					if (gfd1.type == "Force the Hand of Fate" && gfd2.type == "Force the Hand of Fate") {
-						addOffset(1, i)
-						addOffset(2, i)
+						for (k = 0; k < removedBuffs.length; k++) {
+							removeBuff(removedBuffs[k], i)
+						}
 						break
-					} else {
-						if (gfd2.type == "Force the Hand of Fate" && !efIndices.concat(bsIndices).includes(i-1)) {
-							addOffset(2,i)
-							removeBuff(1,i)
-							break
+					}
+				}
+					if (j == 5){
+					addedBuffCount++
+					addedBuffs.push(j)
+					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+
+					if (addedBuffCount > removedBuffCount){
+						for (k = 0; k < addedBuffs.length; k++) {
+							addOffset(addedBuffs[k], i)
 						}
+						for (k = 0; k < removedBuffs.length; k++) {
+							removeBuff(removedBuffs[k], i)
+						}
+						break
 					}
-				} else {
-				if (j == 1){
-				if (gfd1.type == "Force the Hand of Fate"){
-					if (!bsIndices.includes(i-1)){
-					bsIndices.push(i-1)
-					bsIndices.sort((a, b) => a - b);
+				}
+					if (j == 4){
+					addedBuffCount++
+					addedBuffs.push(j)
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+
+					if (addedBuffCount > removedBuffCount){
+						for (k = 0; k < addedBuffs.length; k++) {
+							addOffset(addedBuffs[k], i)
+						}
+						for (k = 0; k < removedBuffs.length; k++) {
+							removeBuff(removedBuffs[k], i)
+						}
+						break
 					}
-					if (!buffIndices.includes(i-1)){
-						buffIndices.push(i-1)
-						buffIndices.sort((a, b) => a - b);
+				}
+
+					if (j == 3){
+					addedBuffCount++
+					addedBuffs.push(j)
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+
+					if (addedBuffCount > removedBuffCount){
+						for (k = 0; k < addedBuffs.length; k++) {
+							addOffset(addedBuffs[k], i)
+						}
+						for (k = 0; k < removedBuffs.length; k++) {
+							removeBuff(removedBuffs[k], i)
+						}
+						break
 					}
-					
 				}
+					if (j == 2){
+					addedBuffCount++
+					addedBuffs.push(j)
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+
+					if (addedBuffCount > removedBuffCount){
+						for (k = 0; k < addedBuffs.length; k++) {
+							addOffset(addedBuffs[k], i)
+						}
+						for (k = 0; k < removedBuffs.length; k++) {
+							removeBuff(removedBuffs[k], i)
+						}
+						break
+					}
 				}
-				}
-			}
-	}
-				}
-			}
 		}
 	}
 		if(include_ef == true && (cookie3.type == 'Elder Frenzy' || cookie4.type == 'Elder Frenzy' || gambler.hasEf)){
