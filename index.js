@@ -239,7 +239,6 @@ app.controller('myCtrl', function ($scope) {
 		for (i = 0; i + combo_length <= buffIndices.length; i++) {
 			let seqStart = buffIndices[i];
 			let seqEnd = buffIndices[i + combo_length - 1];
-			let seqLength = buffIndices.indexOf(seqEnd) - buffIndices.indexOf(seqStart)
 			let unsableBuffs = []
 			let cfInSeq = false
 			let thing = []
@@ -249,7 +248,7 @@ app.controller('myCtrl', function ($scope) {
 				var idkWhatToNameThis = j
 				cfInSeq = true
 				for (k=j+1; k<=combo_length-1; k++) {
-				if (cfIndices.includes(buffIndices[i+k]) && !bsIndices.includes(buffIndices[i+k]) && !efIndices.includes(buffIndices[i+k])) {
+				if (cfIndices.includes(buffIndices[i+k]) && !bsIndices.includes(buffIndices[i+k]) && !efIndices.includes(buffIndices[i+k] && !skipIndices.includes(buffIndices[i+k]))) {
 					unsableBuffs.push(buffIndices[i+k])
 					let efandbs = efIndices.concat(bsIndices).filter(num => num > seqEnd)
 					if (efandbs.length > 0) {
@@ -349,7 +348,11 @@ app.controller('myCtrl', function ($scope) {
 			if (efIndices.includes(i-num)){
 			efIndices.splice(efIndices.indexOf(i-num), 1)
 			buffIndices.splice(buffIndices.indexOf(i-num),1)
-		}
+			}
+			if (bsIndices.includes(i-num)){
+			bsIndices.splice(bsIndices.indexOf(i-num), 1)
+			buffIndices.splice(buffIndices.indexOf(i-num),1)
+			}
 	}
 
 		function buffRemoval (num, i){
@@ -366,13 +369,15 @@ app.controller('myCtrl', function ($scope) {
 			bsIndices.push(i)
 			buffPushed = true
 		}
-		if (gambler.hasBs || ($scope.randomSeeds[i] > 2/8 && $scope.randomSeeds[i] < 2/7 && $scope.randomSeeds[i+1] < 0.5 && (check_cookies($scope.spellsCastTotal + i + 1, '', false, true) == "Building Special" || check_cookies($scope.spellsCastTotal + i + 1, '', true, true) == "Building Special"))) {
+		if (gambler.hasBs || ($scope.randomSeeds[i+1] < 0.5 && (check_cookies($scope.spellsCastTotal + i + 1, '', false, true) == "Building Special" || check_cookies($scope.spellsCastTotal + i + 1, '', true, true) == "Building Special"))) {
+			let gfd0 = check_gambler(i+$scope.spellsCastTotal-0)
 			let gfd1 = check_gambler(i+$scope.spellsCastTotal-1)
 			let gfd2 = check_gambler(i+$scope.spellsCastTotal-2)
 			let gfd3 = check_gambler(i+$scope.spellsCastTotal-3)
 			let gfd4 = check_gambler(i+$scope.spellsCastTotal-4)
 			let gfd5 = check_gambler(i+$scope.spellsCastTotal-5)
 			let gfd6 = check_gambler(i+$scope.spellsCastTotal-6)
+			// currently handles 7x offsets or less
 			for (j=6; j>1; j--) {
 				let removedBuffCount = 0
 				let addedBuffCount = 0
@@ -381,11 +386,13 @@ app.controller('myCtrl', function ($scope) {
 				if (j == 6){
 					addedBuffCount++
 					addedBuffs.push(j)
+					if (gfd6.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(6)} else{if(buffRemoval(6, i) == true){removedBuffCount++; removedBuffs.push(6)}}
 					if (gfd5.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(5)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(5)}}
 					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
 
 					if (addedBuffCount > removedBuffCount){
 						for (k = 0; k < addedBuffs.length; k++) {
@@ -400,10 +407,12 @@ app.controller('myCtrl', function ($scope) {
 					if (j == 5){
 					addedBuffCount++
 					addedBuffs.push(j)
+					if (gfd5.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(5)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(5)}}
 					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
 
 					if (addedBuffCount > removedBuffCount){
 						for (k = 0; k < addedBuffs.length; k++) {
@@ -418,9 +427,11 @@ app.controller('myCtrl', function ($scope) {
 					if (j == 4){
 					addedBuffCount++
 					addedBuffs.push(j)
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
 
 					if (addedBuffCount > removedBuffCount){
 						for (k = 0; k < addedBuffs.length; k++) {
@@ -436,8 +447,10 @@ app.controller('myCtrl', function ($scope) {
 					if (j == 3){
 					addedBuffCount++
 					addedBuffs.push(j)
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
 
 					if (addedBuffCount > removedBuffCount){
 						for (k = 0; k < addedBuffs.length; k++) {
@@ -452,8 +465,24 @@ app.controller('myCtrl', function ($scope) {
 					if (j == 2){
 					addedBuffCount++
 					addedBuffs.push(j)
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-
+					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
+					if (addedBuffCount > removedBuffCount){
+						for (k = 0; k < addedBuffs.length; k++) {
+							addOffset(addedBuffs[k], i)
+						}
+						for (k = 0; k < removedBuffs.length; k++) {
+							removeBuff(removedBuffs[k], i)
+						}
+						break
+					}
+				}
+					if (j == 1){
+					addedBuffCount++
+					addedBuffs.push(j)
+					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
+					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
 					if (addedBuffCount > removedBuffCount){
 						for (k = 0; k < addedBuffs.length; k++) {
 							addOffset(addedBuffs[k], i)
