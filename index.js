@@ -173,7 +173,7 @@ app.controller('myCtrl', function ($scope) {
 			$scope.cookies[i].push(cookie2Backfire)
 			$scope.cookies[i].push(gambler)
 
-			cookiesAssignBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire, i);
+			cookiesAssignBuffs($scope.include_ef_in_sequence, cookie1Success, cookie2Success, cookie1Backfire, cookie2Backfire, i, $scope.lookahead);
 
 
 			if (($scope.skip_abominations && gambler.type == 'Resurrect Abomination') || ($scope.skip_edifices && gambler.type == 'Spontaneous Edifice' && !gambler.backfire)) {
@@ -329,7 +329,13 @@ app.controller('myCtrl', function ($scope) {
 	
 
 
-	function cookiesAssignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, i) {
+	function cookiesAssignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, i, lookAhead) {
+		let buffPushed = false
+
+
+
+
+
 		function addOffset(num, i) {
 				if (!bsIndices.includes(i-num)){
 					bsIndices.push(i-num)
@@ -339,6 +345,10 @@ app.controller('myCtrl', function ($scope) {
 					buffIndices.push(i-num)
 					buffIndices.sort((a, b) => a - b);
 					}
+			if (efIndices.includes(i-num)){
+			efIndices.splice(efIndices.indexOf(i-num), 1)
+			buffIndices.splice(buffIndices.indexOf(i-num),1)
+			}
 		}
 		function removeBuff (num, i) {
 			if (cfIndices.includes(i-num)){
@@ -362,139 +372,15 @@ app.controller('myCtrl', function ($scope) {
 			return false
 		}
 		}
-
-		let buffPushed = false
-
+		
 		if (cookie1.type == 'Building Special' || cookie2.type == 'Building Special' || gambler.hasBs) {
 			bsIndices.push(i)
 			buffPushed = true
 		}
-		if (gambler.hasBs || ($scope.randomSeeds[i+1] < 0.5 && (check_cookies($scope.spellsCastTotal + i + 1, '', false, true) == "Building Special" || check_cookies($scope.spellsCastTotal + i + 1, '', true, true) == "Building Special"))) {
-			let gfd0 = check_gambler(i+$scope.spellsCastTotal-0)
-			let gfd1 = check_gambler(i+$scope.spellsCastTotal-1)
-			let gfd2 = check_gambler(i+$scope.spellsCastTotal-2)
-			let gfd3 = check_gambler(i+$scope.spellsCastTotal-3)
-			let gfd4 = check_gambler(i+$scope.spellsCastTotal-4)
-			let gfd5 = check_gambler(i+$scope.spellsCastTotal-5)
-			let gfd6 = check_gambler(i+$scope.spellsCastTotal-6)
-			// currently handles 7x offsets or less
-			for (j=6; j>1; j--) {
-				let removedBuffCount = 0
-				let addedBuffCount = 0
-				let removedBuffs = []
-				let addedBuffs = []
-				if (j == 6){
-					addedBuffCount++
-					addedBuffs.push(j)
-					if (gfd6.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(6)} else{if(buffRemoval(6, i) == true){removedBuffCount++; removedBuffs.push(6)}}
-					if (gfd5.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(5)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(5)}}
-					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
-
-					if (addedBuffCount > removedBuffCount){
-						for (k = 0; k < addedBuffs.length; k++) {
-							addOffset(addedBuffs[k], i)
-						}
-						for (k = 0; k < removedBuffs.length; k++) {
-							removeBuff(removedBuffs[k], i)
-						}
-						break
-					}
-				}
-					if (j == 5){
-					addedBuffCount++
-					addedBuffs.push(j)
-					if (gfd5.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(5)} else{if(buffRemoval(5, i) == true){removedBuffCount++; removedBuffs.push(5)}}
-					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
-
-					if (addedBuffCount > removedBuffCount){
-						for (k = 0; k < addedBuffs.length; k++) {
-							addOffset(addedBuffs[k], i)
-						}
-						for (k = 0; k < removedBuffs.length; k++) {
-							removeBuff(removedBuffs[k], i)
-						}
-						break
-					}
-				}
-					if (j == 4){
-					addedBuffCount++
-					addedBuffs.push(j)
-					if (gfd4.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(4)} else{if(buffRemoval(4, i) == true){removedBuffCount++; removedBuffs.push(4)}}
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
-
-					if (addedBuffCount > removedBuffCount){
-						for (k = 0; k < addedBuffs.length; k++) {
-							addOffset(addedBuffs[k], i)
-						}
-						for (k = 0; k < removedBuffs.length; k++) {
-							removeBuff(removedBuffs[k], i)
-						}
-						break
-					}
-				}
-
-					if (j == 3){
-					addedBuffCount++
-					addedBuffs.push(j)
-					if (gfd3.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(3)} else{if(buffRemoval(3, i) == true){removedBuffCount++; removedBuffs.push(3)}}
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
-
-					if (addedBuffCount > removedBuffCount){
-						for (k = 0; k < addedBuffs.length; k++) {
-							addOffset(addedBuffs[k], i)
-						}
-						for (k = 0; k < removedBuffs.length; k++) {
-							removeBuff(removedBuffs[k], i)
-						}
-						break
-					}
-				}
-					if (j == 2){
-					addedBuffCount++
-					addedBuffs.push(j)
-					if (gfd2.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(2)} else{if(buffRemoval(2, i) == true){removedBuffCount++; removedBuffs.push(2)}}
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
-					if (addedBuffCount > removedBuffCount){
-						for (k = 0; k < addedBuffs.length; k++) {
-							addOffset(addedBuffs[k], i)
-						}
-						for (k = 0; k < removedBuffs.length; k++) {
-							removeBuff(removedBuffs[k], i)
-						}
-						break
-					}
-				}
-					if (j == 1){
-					addedBuffCount++
-					addedBuffs.push(j)
-					if (gfd1.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(1, i) == true){removedBuffCount++; removedBuffs.push(1)}}
-					if (gfd0.type == "Force the Hand of Fate"){addedBuffCount++; addedBuffs.push(1)} else{if(buffRemoval(0, i) == true){removedBuffCount++; removedBuffs.push(0)}}
-					if (addedBuffCount > removedBuffCount){
-						for (k = 0; k < addedBuffs.length; k++) {
-							addOffset(addedBuffs[k], i)
-						}
-						for (k = 0; k < removedBuffs.length; k++) {
-							removeBuff(removedBuffs[k], i)
-						}
-						break
-					}
-				}
-		}
-	}
+		let fthofBs = []
+		if ((cookie1.type == 'Building Special' || cookie2.type == 'Building Special') && $scope.randomSeeds[i] < 0.5) {
+			fthofBs.push(i)
+		} // this thing is used for purely offset abuse detection so for g!fthofs to like resolve on it the gfdrs needs to be <0.5
 		if(include_ef == true && (cookie3.type == 'Elder Frenzy' || cookie4.type == 'Elder Frenzy' || gambler.hasEf)){
 			efIndices.push(i)
 			buffPushed = true
@@ -506,11 +392,32 @@ app.controller('myCtrl', function ($scope) {
 		if (buffPushed){
 			buffIndices.push(i)
 		}
-
-
-
+		let thing = []
+		let badThing = []
+		let veryBadThing = []
+		let num = 0
+		// im lazy at naming stuff but thing is g!fthofs that give bs from the offset, bad thing is non g!fthof spells and verybadthing are non g!fthof spells which are included in bsIndices or efIndices.
+if (i == lookAhead-1){		
+		for (k=0; k < fthofBs.length-1; k++){ 
+		for (j = 1; j<=7; j++) { //does thing 7 times so 7x offset is the max it tries to find
+			if ($scope.randomSeeds[fthofBs[k] - j] > 0.125 && $scope.randomSeeds[fthofBs[k] - j] < 0.25){
+				if (j !== 1) {thing.push(j)} else {num = 1} // this is because a g!fthof right before a fthof bs is like already in bsIndices so its counted using a separate variable
+			} else {badThing.push(j)}
+}
+		let offsetLength = Math.max(...thing)
+		badThing = badThing.filter(a => a < offsetLength)
+		for (j=0; j < badThing.length; j++){
+			if (bsIndices.includes(badThing[j]) ||efIndices.includes(badThing[j])) {
+				veryBadThing.push(badThing[j])
+			}
+}
+		if (veryBadThing.length < (thing.length+num)){
+			bsIndices.push(...thing)
+			bsIndices.sort((a,b) => a-b)
+		}
 	}
-
+}
+}
 	function choose(arr) {
 		return arr[Math.floor(Math.random() * arr.length)];
 	}
@@ -529,7 +436,8 @@ app.controller('myCtrl', function ($scope) {
 		var gfdBackfire = 0.5; /*M.getFailChance(gfdSpell);
     
     if(FortuneCookie.detectKUGamblerPatch()) gfdBackfire *= 2;
-    else gfdBackfire = Math.max(gfdBackfire, 0.5);*/
+    else gfdBackfire = Math.max(gfdBackfire, 0.5);
+	*/
 
 		gamblerSpell = {};
 		gamblerSpell.type = gfdSpell.name;
