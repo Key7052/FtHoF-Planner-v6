@@ -331,47 +331,20 @@ app.controller('myCtrl', function ($scope) {
 
 	function cookiesAssignBuffs(include_ef, cookie1,cookie2,cookie3,cookie4, i, lookAhead) {
 		let buffPushed = false
-
-
-
-
-
-		function addOffset(num, i) {
-				if (!bsIndices.includes(i-num)){
-					bsIndices.push(i-num)
-					bsIndices.sort((a, b) => a - b);
-					}
-				if (!buffIndices.includes(i-num)){
-					buffIndices.push(i-num)
-					buffIndices.sort((a, b) => a - b);
-					}
-			if (efIndices.includes(i-num)){
-			efIndices.splice(efIndices.indexOf(i-num), 1)
-			buffIndices.splice(buffIndices.indexOf(i-num),1)
+		function removeBuff (x) {
+			if (cfIndices.includes(x)){
+			cfIndices.splice(cfIndices.indexOf(x), 1)
+			buffIndices.splice(buffIndices.indexOf(x),1)
 			}
-		}
-		function removeBuff (num, i) {
-			if (cfIndices.includes(i-num)){
-			cfIndices.splice(cfIndices.indexOf(i-num), 1)
-			buffIndices.splice(buffIndices.indexOf(i-num),1)
+			if (efIndices.includes(x)){
+			efIndices.splice(efIndices.indexOf(x), 1)
+			buffIndices.splice(buffIndices.indexOf(x),1)
 			}
-			if (efIndices.includes(i-num)){
-			efIndices.splice(efIndices.indexOf(i-num), 1)
-			buffIndices.splice(buffIndices.indexOf(i-num),1)
-			}
-			if (bsIndices.includes(i-num)){
-			bsIndices.splice(bsIndices.indexOf(i-num), 1)
-			buffIndices.splice(buffIndices.indexOf(i-num),1)
+			if (bsIndices.includes(x)){
+			bsIndices.splice(bsIndices.indexOf(x), 1)
+			buffIndices.splice(buffIndices.indexOf(x),1)
 			}
 	}
-
-		function buffRemoval (num, i){
-			if (bsIndices.includes(i-num) || efIndices.includes(i-num)){
-			return true
-		} else {
-			return false
-		}
-		}
 		
 		if (cookie1.type == 'Building Special' || cookie2.type == 'Building Special' || gambler.hasBs) {
 			bsIndices.push(i)
@@ -392,28 +365,33 @@ app.controller('myCtrl', function ($scope) {
 		if (buffPushed){
 			buffIndices.push(i)
 		}
+
+		// im lazy at naming stuff but thing is g!fthofs that give bs from the offset, bad thing is non g!fthof spells and verybadthing are non g!fthof spells which are included in bsIndices or efIndices.
+if (i == lookAhead-1){		
+		for (k=0; k < fthofBs.length-1; k++){
 		let thing = []
 		let badThing = []
 		let veryBadThing = []
-		let num = 0
-		// im lazy at naming stuff but thing is g!fthofs that give bs from the offset, bad thing is non g!fthof spells and verybadthing are non g!fthof spells which are included in bsIndices or efIndices.
-if (i == lookAhead-1){		
-		for (k=0; k < fthofBs.length-1; k++){ 
+		let num = 0 
 		for (j = 1; j<=7; j++) { //does thing 7 times so 7x offset is the max it tries to find
 			if ($scope.randomSeeds[fthofBs[k] - j] > 0.125 && $scope.randomSeeds[fthofBs[k] - j] < 0.25){
-				if (j !== 1) {thing.push(j)} else {num = 1} // this is because a g!fthof right before a fthof bs is like already in bsIndices so its counted using a separate variable
-			} else {badThing.push(j)}
+				if (j !== 1) {thing.push(fthofBs[j]-k)} else {num = 1} // this is because a g!fthof right before a fthof bs is like already in bsIndices so its counted using a separate variable
+			} else {badThing.push(fthofBs[j]-k)}
 }
-		let offsetLength = Math.max(...thing)
+		let things = [...thing, ...badThing]
+		let offsetLength = Math.max(...thing - Math.min(...things))
 		badThing = badThing.filter(a => a < offsetLength)
 		for (j=0; j < badThing.length; j++){
-			if (bsIndices.includes(badThing[j]) ||efIndices.includes(badThing[j])) {
+			if (bsIndices.includes(badThing[j]) || efIndices.includes(badThing[j])) {
 				veryBadThing.push(badThing[j])
 			}
 }
 		if (veryBadThing.length < (thing.length+num)){
 			bsIndices.push(...thing)
 			bsIndices.sort((a,b) => a-b)
+		}
+		for (j=0; j < veryBadThing.length; j++){
+		removeBuff(veryBadThing[j])
 		}
 	}
 }
