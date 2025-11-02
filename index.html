@@ -29,7 +29,7 @@
 </md-toolbar>
 <md-dialog>
 </md-dialog>
-<div ng-app="myApp" ng-controller="myCtrl" data-ng-init="loadParams()">
+<div ng-app="myApp" ng-controller="myCtrl" class="{{(default_font ? 'default' : '')}}" data-ng-init="loadParams()">
     <div class="content">
         <div layout="row">
             <md-input-container flex>
@@ -274,6 +274,13 @@
         </ul>
 
         <md-divider></md-divider>
+
+        <br>
+        <md-checkbox ng-model="default_font" checked>
+            Default Font
+        </md-checkbox>
+        
+        <md-divider></md-divier>
 
         <label>Lookahead length</label>
         <input type="number" ng-model="lookahead" min=10 max=50000>
