@@ -389,9 +389,10 @@ if (i == lookAhead-1){
 		if (veryBadThing.length < (thing.length+num)){
 			bsIndices.push(...thing)
 			bsIndices.sort((a,b) => a-b)
-		}
+		
 		for (j=0; j < veryBadThing.length; j++){
 		removeBuff(veryBadThing[j])
+		}
 		}
 	}
 }
@@ -771,3 +772,4 @@ if (i == lookAhead-1){
 		},
 	};
 });
+
